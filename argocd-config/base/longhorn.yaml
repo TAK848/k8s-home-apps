@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: longhorn
-  namespace: longhorn-system
+  namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
     argocd.argoproj.io/sync-wave: "5"
@@ -19,8 +19,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+    # syncOptions:
+    # - CreateNamespace=true
     # managedNamespaceMetadata:
     #   labels: # The labels to set on the application namespace
     #     any: label
