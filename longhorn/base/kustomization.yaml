@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: longhorn-system
 resources:
   - namespace.yaml
-  - upstream/install.yaml
+  # - upstream/install.yaml
 # sortOptions:
 #   order: fifo
