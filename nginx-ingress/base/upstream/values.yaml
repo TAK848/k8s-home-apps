@@ -1,0 +1,9 @@
+controller:
+  replicaCount: 5
+  service:
+    loadBalancerIP: 10.3.255.200 # 外部用のIPアドレスを指定
+  ingressClassResource:
+    name: nginx-external # ここを変更
+    enabled: true
+    defaultClass: false
+  ingressClass: nginx-external # これも変更
