@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: test-argo-nginx-ingress
-  namespace: test
+  namespace: longhorn-system
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -16,7 +16,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: argo-nginx-deployment-service
+                name: longhorn-frontend
                 port:
                   name: http
       host: test-ingress-nginx.tak848.me
