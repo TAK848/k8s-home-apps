@@ -3,8 +3,8 @@ kind: Kustomization
 namespace: ingress-nginx
 helmCharts:
   - includeCRDs: true
-    name: ingress-nginx-external
+    name: ingress-nginx
     namespace: ingress-nginx
-    releaseName: ingress-nginx
+    releaseName: ingress-nginx-external
     repo: https://kubernetes.github.io/ingress-nginx
     valuesFile: values.yaml
