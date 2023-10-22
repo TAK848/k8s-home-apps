@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: test-ingress-nginx-cert
+  namespace: test
+spec:
+  secretName: test-ingress-nginx-cert-secret
+  dnsNames:
+    - test-ingress-nginx.tak848.me
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
