@@ -1,4 +1,5 @@
 controller:
+  electionID: ingress-controller-external-leader
   replicaCount: 5
   service:
     loadBalancerIP: 10.3.255.160 # 外部用のIPアドレスを指定
