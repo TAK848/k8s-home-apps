@@ -1,0 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: work@tak848.net
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - selector:
+        dnsZones:
+        - "tak848.net"
+      dns01:
+        route53:
+          region: ap-northeast-1
+          accessKeyIDSecretRef:
+            name: route53-credentials
+            key: accesskey
+          secretAccessKeySecretRef:
+            name: route53-credentials
+            key: secretkey
+    - selector:
+        dnsZones:
+        - "tak848.me"
+      dns01:
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-key

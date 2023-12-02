@@ -4,3 +4,4 @@ resources:
 - ../../base
 patches:
 - path: common.yaml
+- path: metallb.yaml
