@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: longhorn-volv-pvc2
+  name: longhorn-volv-pvc3
 spec:
   accessModes:
   - ReadWriteMany
-  storageClassName: longhorn
+  # storageClassName: longhorn
   resources:
     requests:
       storage: 2Gi
@@ -42,4 +42,4 @@ spec:
       volumes:
       - name: volv
         persistentVolumeClaim:
-          claimName: longhorn-volv-pvc2
+          claimName: longhorn-volv-pvc3
