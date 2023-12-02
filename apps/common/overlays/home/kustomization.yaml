@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - ../../base
 - storage-class.yaml
-- testpod.yaml
+# - testpod.yaml
 # patches:
 # - path: common.yaml
