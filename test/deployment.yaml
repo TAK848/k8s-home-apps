@@ -4,7 +4,7 @@ metadata:
   name: longhorn-volv-pvc2
 spec:
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   storageClassName: longhorn
   resources:
     requests:
@@ -27,19 +27,19 @@ spec:
         component: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginxdemos/hello
-          resources:
-            limits:
-              cpu: "1"
-              memory: "512Mi"
-            requests:
-              cpu: "0.5"
-              memory: "256Mi"
-          volumeMounts:
-            - name: volv
-              mountPath: /data
-      volumes:
+      - name: nginx
+        image: nginxdemos/hello
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
+        volumeMounts:
         - name: volv
-          persistentVolumeClaim:
-            claimName: longhorn-volv-pvc2
+          mountPath: /data
+      volumes:
+      - name: volv
+        persistentVolumeClaim:
+          claimName: longhorn-volv-pvc2

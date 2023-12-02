@@ -1,0 +1,9 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: common-components
+  namespace: argocd
+spec:
+  source:
+    path: apps/common/overlays/home
+    targetRevision: main
