@@ -4,7 +4,7 @@ metadata:
   name: longhorn-volv-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: longhorn
   resources:
     requests:
