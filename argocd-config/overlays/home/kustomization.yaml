@@ -5,3 +5,5 @@ resources:
 patches:
 - path: common.yaml
 - path: metallb.yaml
+- path: vault.yaml
+# - path: logging.yaml
