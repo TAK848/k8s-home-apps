@@ -266,7 +266,7 @@ spec:
               valueFrom:
                secretKeyRef:
                  name: home-kube-aws-kms-user
-                 key: AWS_SECRET_ACCESS_KEY
+                 key: secretKey
           volumeMounts:
           
   

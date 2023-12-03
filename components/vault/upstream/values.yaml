@@ -584,7 +584,7 @@ server:
     secretKey: accessKey
   - envName: AWS_SECRET_ACCESS_KEY
     secretName: home-kube-aws-kms-user
-    secretKey: AWS_SECRET_ACCESS_KEY
+    secretKey: secretKey
 
   # Deprecated: please use 'volumes' instead.
   # extraVolumes is a list of extra volumes to mount. These will be exposed
