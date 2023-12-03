@@ -74,8 +74,8 @@ spec:
   kubernetes:
     role: k8s-test-role
     serviceAccount: default
-    # audiences:
-    # - vault
+    audiences:
+    - vault
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultStaticSecret
