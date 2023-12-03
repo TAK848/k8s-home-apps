@@ -571,7 +571,7 @@ server:
   extraEnvironmentVars:
     VAULT_SEAL_TYPE: awskms
     AWS_REGION: ap-northeast-1
-    AWS_KMS_KEY_ID: ecf2f636-d25f-4b1a-adfe-3195e00eb449
+    AWSKMS_SEAL_KEY_ID: ecf2f636-d25f-4b1a-adfe-3195e00eb449
   # GOOGLE_REGION: global
   # GOOGLE_PROJECT: myproject
   # GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/myproject/myproject-creds.json
