@@ -7,3 +7,4 @@ resources:
 # - logging.yaml
 - test.yaml
 - vault.yaml
+- vault-secrets-operator.yaml
