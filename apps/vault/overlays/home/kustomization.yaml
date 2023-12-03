@@ -4,5 +4,6 @@ namespace: vault
 resources:
 - ../../base
 - sealed-home-vault-kms-credentials.yaml
+- ingress.yaml
 # patches:
 # - path: common.yaml
