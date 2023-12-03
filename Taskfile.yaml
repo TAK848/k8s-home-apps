@@ -17,6 +17,5 @@ tasks:
     silent: false
   update-vault:
     cmds:
-    - helm template vault hashicorp/consul -f components/consul/upstream/values.yaml  > components/consul/upstream/install.yaml
     - helm template vault hashicorp/vault -f components/vault/upstream/values.yaml  > components/vault/upstream/install.yaml
     silent: false
