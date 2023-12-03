@@ -39,7 +39,46 @@ spec:
         volumeMounts:
         - name: volv
           mountPath: /data
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: test-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: test-secret
+              key: password
       volumes:
       - name: volv
         persistentVolumeClaim:
           claimName: longhorn-volv-pvc3
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: vault-auth
+spec:
+  vaultConnectionRef: default
+  method: kubernetes
+  mount: k8s-test-path
+  kubernetes:
+    role: k8s-test-role
+    serviceAccount: default
+    # audiences:
+    # - vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: test-vault-static-secret
+spec:
+  vaultAuthRef: vault-auth
+  mount: homek8s
+  path: test1
+  type: kv-v2
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: test-secret # secret name
