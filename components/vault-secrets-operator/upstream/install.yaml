@@ -1848,25 +1848,6 @@ spec:
             path: uid
         name: podinfo
 ---
-# Source: vault-secrets-operator/templates/default-vault-connection.yaml
-apiVersion: secrets.hashicorp.com/v1beta1
-kind: VaultConnection
-metadata:
-  name: default
-  namespace: default
-  labels:
-    control-plane: controller-manager
-    component: controller-manager
-    app.kubernetes.io/component: controller-manager
-    helm.sh/chart: vault-secrets-operator-0.4.0
-    app.kubernetes.io/name: vault-secrets-operator
-    app.kubernetes.io/instance: vso
-    app.kubernetes.io/version: "0.4.0"
-    app.kubernetes.io/managed-by: Helm
-spec:
-  address: http://vault.vault.svc.cluster.local:8200
-  skipTLSVerify: false
----
 # Source: vault-secrets-operator/templates/tests/test-runner.yaml
 apiVersion: v1
 kind: Pod

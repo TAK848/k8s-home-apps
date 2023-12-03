@@ -56,11 +56,19 @@ spec:
           claimName: longhorn-volv-pvc3
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  name: vault-connection
+spec:
+  address: http://vault.vault.svc.cluster.local:8200
+  # skipTLSVerify: false
+---
+apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
 metadata:
   name: vault-auth
 spec:
-  vaultConnectionRef: default
+  vaultConnectionRef: vault-connection
   method: kubernetes
   mount: k8s-test-path
   kubernetes:
