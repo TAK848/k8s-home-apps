@@ -250,12 +250,6 @@ spec:
               value: "/home/vault"
             
             
-            - name: "AWSKMS_SEAL_KEY_ID"
-              value: "ecf2f636-d25f-4b1a-adfe-3195e00eb449"
-            - name: "AWS_REGION"
-              value: "ap-northeast-1"
-            - name: "VAULT_SEAL_TYPE"
-              value: "awskms"
             
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
@@ -347,12 +341,6 @@ spec:
         - name: VAULT_ADDR
           value: http://vault.vault.svc:8200
         
-        - name: "AWSKMS_SEAL_KEY_ID"
-          value: "ecf2f636-d25f-4b1a-adfe-3195e00eb449"
-        - name: "AWS_REGION"
-          value: "ap-northeast-1"
-        - name: "VAULT_SEAL_TYPE"
-          value: "awskms"
       command:
         - /bin/sh
         - -c
