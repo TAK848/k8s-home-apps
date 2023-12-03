@@ -9,3 +9,14 @@ tasks:
     cmds:
     - helm template metallb metallb/metallb -f components/metallb/upstream/values.yaml  > components/metallb/upstream/install.yaml
     silent: false
+  update-logging:
+    cmds:
+    - helm template loki grafana/loki -f components/grafana-loki/upstream/values.yaml  > components/grafana-loki/upstream/install.yaml
+    - helm template minio minio/minio -f components/minio/upstream/values.yaml  > components/minio/upstream/install.yaml
+    - helm template grafana grafana/grafana -f components/grafana/upstream/values.yaml  > components/grafana/upstream/install.yaml
+    silent: false
+  update-vault:
+    cmds:
+    - helm template vault hashicorp/consul -f components/consul/upstream/values.yaml  > components/consul/upstream/install.yaml
+    - helm template vault hashicorp/vault -f components/vault/upstream/values.yaml  > components/vault/upstream/install.yaml
+    silent: false
