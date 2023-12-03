@@ -6,5 +6,5 @@ patches:
 - path: common.yaml
 - path: metallb.yaml
 - path: vault.yaml
-- path: vault-secrets-operator.yaml
+# - path: vault-secrets-operator.yaml
 # - path: logging.yaml
