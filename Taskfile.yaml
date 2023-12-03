@@ -17,6 +17,6 @@ tasks:
     silent: false
   update-vault:
     cmds:
-    - helm template vault hashicorp/vault -f components/vault/upstream/values.yaml  > components/vault/upstream/install.yaml
-    - helm template vso hashicorp/vault-secrets-operator -f components/vault-secrets-operator/upstream/values.yaml  > components/vault-secrets-operator/upstream/install.yaml
+    - helm template vault hashicorp/vault -f components/vault/upstream/values.yaml > components/vault/upstream/install.yaml
+    - helm template vso hashicorp/vault-secrets-operator -f components/vault-secrets-operator/upstream/values.yaml --include-crds > components/vault-secrets-operator/upstream/install.yaml
     silent: false
