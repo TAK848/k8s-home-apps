@@ -853,10 +853,10 @@ server:
       # Example configuration for using auto-unseal, using Google Cloud KMS. The
       # GKMS keys must already exist, and the cluster must have a service account
       # that is authorized to access GCP KMS.
-      # seal "awskms" {
-      #   region      = "ap-northeast-1"
-      #   kms_key_id  = "ecf2f636-d25f-4b1a-adfe-3195e00eb449"
-      # }
+      seal "awskms" {
+        region      = "ap-northeast-1"
+        kms_key_id  = "ecf2f636-d25f-4b1a-adfe-3195e00eb449"
+      }
 
       # Example configuration for enabling Prometheus metrics in your config.
       #telemetry {
