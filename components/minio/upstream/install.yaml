@@ -310,9 +310,9 @@ data:
     "s3:ListMultipartUploadParts"
           ],
           "Resource": [
-    "arn:aws:s3:::loki-chunks/*",
-    "arn:aws:s3:::loki-ruler/*",
-    "arn:aws:s3:::loki-admin/*"
+    "arn:aws:s3:::loki-chunks*/*",
+    "arn:aws:s3:::loki-ruler*/*",
+    "arn:aws:s3:::loki-admin*/********"
           ]
         },
         {
@@ -325,9 +325,9 @@ data:
     "s3:ListBucketMultipartUploads"
           ],
           "Resource": [
-    "arn:aws:s3:::loki-chunks/*",
-    "arn:aws:s3:::loki-ruler/*",
-    "arn:aws:s3:::loki-admin/*"
+    "arn:aws:s3:::loki-chunks*",
+    "arn:aws:s3:::loki-ruler*",
+    "arn:aws:s3:::loki-admin*"
           ]
         }
       ]
@@ -552,7 +552,7 @@ spec:
         release: minio
       annotations:
         checksum/secrets: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
-        checksum/config: 6da5f74df4470bd1c20d2cf359ddbed899e1f76fec48e9a44147903c38665f41
+        checksum/config: fff6b17e79bb4b3de51355be46af44d9e762d884d3bc6a6cdb3b0db3a80d196b
     spec:
       securityContext:
         runAsUser: 1000
