@@ -312,7 +312,7 @@ data:
           "Resource": [
     "arn:aws:s3:::loki-chunks*/*",
     "arn:aws:s3:::loki-ruler*/*",
-    "arn:aws:s3:::loki-admin*/********"
+    "arn:aws:s3:::loki-admin*/*"
           ]
         },
         {
@@ -552,7 +552,7 @@ spec:
         release: minio
       annotations:
         checksum/secrets: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
-        checksum/config: fff6b17e79bb4b3de51355be46af44d9e762d884d3bc6a6cdb3b0db3a80d196b
+        checksum/config: b6f554cb08fbface6f139c7a1da6485e42e76133655215c7bac11a4b6a7b3267
     spec:
       securityContext:
         runAsUser: 1000
