@@ -61,7 +61,6 @@ metadata:
   name: vault-connection
 spec:
   address: http://vault.vault.svc.cluster.local:8200
-  # skipTLSVerify: false
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultAuth
@@ -74,8 +73,6 @@ spec:
   kubernetes:
     role: k8s-test-role
     serviceAccount: default
-    # audiences:
-    # - vault
 ---
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultStaticSecret

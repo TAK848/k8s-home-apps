@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: logging-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  ingressClassName: nginx-external
+  rules:
+  - host: minio-console.logging.home.tak848.me
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: minio-console
+            port:
+              number: 9001
+  - host: minio.logging.home.tak848.me
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: minio
+            port:
+              number: 9000
+  tls:
+  - hosts:
+    - minio.logging.home.tak848.me
+    - minio-console.logging.home.tak848.me
+    secretName: logging-ingress-cert-secret
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: logging-ingress-cert
+spec:
+  secretName: logging-ingress-cert-secret
+  dnsNames:
+  - "*.logging.home.tak848.me"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

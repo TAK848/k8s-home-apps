@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: logging
+resources:
+# - ../../../components/grafana
+- ../../../components/minio
+# - ../../../components/grafana-loki
+# - ../../../components/promtail
+# - ../../../components/prometheus
+# - ../../../components/prometheus-operator
+# - ../../../components/alertmanager
+# - ../../../components/kube-state-metrics
+# - ../../../components/node-exporter
+# - ../../../components/velero
+# - ../../../components/velero-plugin-for-aws
+# - ../../../components/velero-plugin-for-gcp
+# - ../../../components/velero-plugin-for-microsoft-azure
+# patches:
+# - path: common.yaml

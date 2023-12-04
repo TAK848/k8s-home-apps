@@ -4,7 +4,7 @@ resources:
 - common.yaml
 - metallb.yaml
 - nginx-ingress-external.yaml
-# - logging.yaml
+- logging.yaml
 - test.yaml
 - vault.yaml
 - vault-secrets-operator.yaml
