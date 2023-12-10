@@ -17,20 +17,20 @@ spec:
     role: minio-role
     serviceAccount: minio-sa
 ---
-# apiVersion: secrets.hashicorp.com/v1beta1
-# kind: VaultStaticSecret
-# metadata:
-#   name: minio-root-static-secret
-# spec:
-#   vaultAuthRef: minio-vault-auth
-#   mount: homek8s
-#   path: logging/minio/root-secret
-#   type: kv-v2
-#   refreshAfter: 60s
-#   destination:
-#     create: true
-#     name: minio-root-secret # secret name
-# ---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: minio-root-static-secret
+spec:
+  vaultAuthRef: minio-vault-auth
+  mount: homek8s
+  path: logging/minio/root-secret
+  type: kv-v2
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: minio-root-secret # secret name
+---
 apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultStaticSecret
 metadata:
