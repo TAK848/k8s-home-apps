@@ -4,7 +4,7 @@ namespace: logging
 resources:
 - namespace.yaml
 # - ../../../components/grafana
-- ../../../components/minio
+# - ../../../components/minio
 # - ../../../components/grafana-loki
 # - ../../../components/promtail
 # - ../../../components/prometheus
