@@ -5,4 +5,4 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: apps/common/overlays/home
+    path: apps/argocd/overlays/home
