@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: logging
+  name: argocd
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: "git@github.com:TAK848/k8s-home-apps.git"
-    path: apps/logging/base
+    path: apps/argocd/base
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
-    namespace: logging
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

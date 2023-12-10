@@ -5,6 +5,10 @@ tasks:
     cmds:
     - echo 'Hello World from Task!'
     silent: true
+  update-argocd:
+    cmds:
+    - helm template argocd argo/argo-cd -f components/argocd/upstream/values.yaml > components/argocd/upstream/install.yaml
+    silent: false
   update-metallb:
     cmds:
     - helm template metallb metallb/metallb -f components/metallb/upstream/values.yaml  > components/metallb/upstream/install.yaml

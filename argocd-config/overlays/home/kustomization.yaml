@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 patches:
+- path: argocd.yaml
 - path: common.yaml
 - path: metallb.yaml
 - path: vault.yaml

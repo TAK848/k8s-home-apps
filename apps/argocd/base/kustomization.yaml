@@ -1,0 +1,6 @@
+namespace: argocd
+resources:
+- namespace.yaml
+- ../../../components/argocd
+patches:
+- path: patch-configmap.yaml
