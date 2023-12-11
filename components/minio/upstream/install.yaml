@@ -223,12 +223,6 @@ data:
     sed -i '$a\' $MINIO_ACCESSKEY_SECRETKEY_TMP
     createUser consoleAdmin
     
-    echo loki > $MINIO_ACCESSKEY_SECRETKEY_TMP
-    cat /config/secrets/minio-loki-user-secret/secretKey >> $MINIO_ACCESSKEY_SECRETKEY_TMP
-    # Add a new line if it doesn't exist
-    sed -i '$a\' $MINIO_ACCESSKEY_SECRETKEY_TMP
-    createUser lokipolicy
-    
     
   add-policy: |-
     #!/bin/sh
@@ -292,48 +286,7 @@ data:
     connectToMinio $scheme
     
     
-    # Create the policies
-    createPolicy lokipolicy policy_0
     
-  # Policy: lokipolicy
-  policy_0.json: |-
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-    "s3:AbortMultipartUpload",
-    "s3:GetObject",
-    "s3:DeleteObject",
-    "s3:PutObject",
-    "s3:ListMultipartUploadParts"
-          ],
-          "Resource": [
-    "arn:aws:s3:::loki-chunks*/*",
-    "arn:aws:s3:::loki-ruler*/*",
-    "arn:aws:s3:::loki-admin*/*"
-          ]
-        },
-        {
-          "Effect": "Allow",
-          "Action": [
-    "s3:CreateBucket",
-    "s3:DeleteBucket",
-    "s3:GetBucketLocation",
-    "s3:ListBucket",
-    "s3:ListBucketMultipartUploads"
-          ],
-          "Resource": [
-    "arn:aws:s3:::loki-chunks*",
-    "arn:aws:s3:::loki-ruler*",
-    "arn:aws:s3:::loki-admin*"
-          ]
-        }
-      ]
-    }
-    
-  
   add-svcacct: |-
     #!/bin/sh
     set -e ; # Have script exit in the event of a failed command.
@@ -552,7 +505,7 @@ spec:
         release: minio
       annotations:
         checksum/secrets: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
-        checksum/config: b6f554cb08fbface6f139c7a1da6485e42e76133655215c7bac11a4b6a7b3267
+        checksum/config: a14ba152986c1b99f5cf61df14a211042f3995d31c4fe12aedc62155501c686c
     spec:
       securityContext:
         runAsUser: 1000
@@ -644,32 +597,7 @@ spec:
                   items:
                     - key: secretKey
                       path: secrets/minio-console-secret/secretKey
-              - secret:
-                  name: minio-loki-user-secret
-                  items:
-                    - key: secretKey
-                      path: secrets/minio-loki-user-secret/secretKey
       serviceAccountName: minio-sa
-      initContainers:
-        - name: minio-make-policy
-          image: "quay.io/minio/mc:RELEASE.2023-09-29T16-41-22Z"
-          imagePullPolicy: IfNotPresent
-          command: [ "/bin/sh", "/config/add-policy" ]
-          env:
-            - name: MINIO_ENDPOINT
-              value: minio
-            - name: MINIO_PORT
-              value: "9000"
-          volumeMounts:
-            - name: etc-path
-              mountPath: /etc/minio/mc
-            - name: tmp
-              mountPath: /tmp
-            - name: minio-configuration
-              mountPath: /config
-          resources:
-            requests:
-              memory: 128Mi
       containers:
         - name: minio-make-bucket
           image: "quay.io/minio/mc:RELEASE.2023-09-29T16-41-22Z"
