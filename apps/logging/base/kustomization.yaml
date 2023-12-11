@@ -18,3 +18,22 @@ resources:
 # - ../../../components/velero-plugin-for-microsoft-azure
 # patches:
 # - path: common.yaml
+replacements:
+- path: replace-minio-ns.yaml
+# - source:
+#     fieldPath: metadata.namespace
+#     group: apps
+#     kind: StatefulSet
+#     name: minio
+#     version: v1
+#   targets:
+#   - fieldPaths:
+#     - spec.template.spec.containers.0.command.2
+#     options:
+#       delimiter: .
+#       index: 6
+#     select:
+#       group: apps
+#       kind: StatefulSet
+#       name: minio
+#       version: v1

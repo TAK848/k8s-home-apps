@@ -5,21 +5,6 @@ kind: ServiceAccount
 metadata:
   name: "minio-sa"
 ---
-# Source: minio/templates/secrets.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: minio
-  labels:
-    app: minio
-    chart: minio-5.0.14
-    release: minio
-    heritage: Helm
-type: Opaque
-data:
-  rootUser: "YWRtaW4="
-  rootPassword: "cGFzc3dvcmQ="
----
 # Source: minio/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -233,8 +218,17 @@ data:
     
     # Create the users
     echo console > $MINIO_ACCESSKEY_SECRETKEY_TMP
-    echo console123 >> $MINIO_ACCESSKEY_SECRETKEY_TMP
+    cat /config/secrets/minio-console-secret/secretKey >> $MINIO_ACCESSKEY_SECRETKEY_TMP
+    # Add a new line if it doesn't exist
+    sed -i '$a\' $MINIO_ACCESSKEY_SECRETKEY_TMP
     createUser consoleAdmin
+    
+    echo loki > $MINIO_ACCESSKEY_SECRETKEY_TMP
+    cat /config/secrets/minio-loki-user-secret/secretKey >> $MINIO_ACCESSKEY_SECRETKEY_TMP
+    # Add a new line if it doesn't exist
+    sed -i '$a\' $MINIO_ACCESSKEY_SECRETKEY_TMP
+    createUser lokipolicy
+    
     
   add-policy: |-
     #!/bin/sh
@@ -298,7 +292,48 @@ data:
     connectToMinio $scheme
     
     
+    # Create the policies
+    createPolicy lokipolicy policy_0
     
+  # Policy: lokipolicy
+  policy_0.json: |-
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+    "s3:AbortMultipartUpload",
+    "s3:GetObject",
+    "s3:DeleteObject",
+    "s3:PutObject",
+    "s3:ListMultipartUploadParts"
+          ],
+          "Resource": [
+    "arn:aws:s3:::loki-chunks*/*",
+    "arn:aws:s3:::loki-ruler*/*",
+    "arn:aws:s3:::loki-admin*/*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+    "s3:CreateBucket",
+    "s3:DeleteBucket",
+    "s3:GetBucketLocation",
+    "s3:ListBucket",
+    "s3:ListBucketMultipartUploads"
+          ],
+          "Resource": [
+    "arn:aws:s3:::loki-chunks*",
+    "arn:aws:s3:::loki-ruler*",
+    "arn:aws:s3:::loki-admin*"
+          ]
+        }
+      ]
+    }
+    
+  
   add-svcacct: |-
     #!/bin/sh
     set -e ; # Have script exit in the event of a failed command.
@@ -516,8 +551,8 @@ spec:
         app: minio
         release: minio
       annotations:
-        checksum/secrets: 3d0af2a708116035b3d59eb176e9f50b986f0c41f201a34b07b9cc5328f4e607
-        checksum/config: c713b8cf323d93151279854ec311bad62f7c55fab53b791c236c04bd2b66bc6a
+        checksum/secrets: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/config: b6f554cb08fbface6f139c7a1da6485e42e76133655215c7bac11a4b6a7b3267
     spec:
       securityContext:
         runAsUser: 1000
@@ -532,7 +567,7 @@ spec:
           command: [
             "/bin/sh",
             "-ce",
-            "/usr/bin/docker-entrypoint.sh minio server  http://minio-{0...1}.minio-svc.default.svc.cluster.local/export -S /etc/minio/certs/ --address :9000 --console-address :9001"
+            "/usr/bin/docker-entrypoint.sh minio server  http://minio-{0...1}.minio-svc.MINIO_NAMESPACE_PLACEHOLDER.svc.cluster.local/export -S /etc/minio/certs/ --address :9000 --console-address :9001"
           ]
           volumeMounts:
             - name: export
@@ -546,12 +581,12 @@ spec:
             - name: MINIO_ROOT_USER
               valueFrom:
                 secretKeyRef:
-                  name: minio
+                  name: minio-root-secret
                   key: rootUser
             - name: MINIO_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: minio
+                  name: minio-root-secret
                   key: rootPassword
             - name: MINIO_PROMETHEUS_AUTH_TYPE
               value: "public"
@@ -561,7 +596,7 @@ spec:
       volumes:
         - name: minio-user
           secret:
-            secretName: minio        
+            secretName: minio-root-secret        
   volumeClaimTemplates:
     - metadata:
         name: export
@@ -603,8 +638,38 @@ spec:
               - configMap:
                   name: minio
               - secret:
-                  name: minio
+                  name: minio-root-secret
+              - secret:
+                  name: minio-console-secret
+                  items:
+                    - key: secretKey
+                      path: secrets/minio-console-secret/secretKey
+              - secret:
+                  name: minio-loki-user-secret
+                  items:
+                    - key: secretKey
+                      path: secrets/minio-loki-user-secret/secretKey
       serviceAccountName: minio-sa
+      initContainers:
+        - name: minio-make-policy
+          image: "quay.io/minio/mc:RELEASE.2023-09-29T16-41-22Z"
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/sh", "/config/add-policy" ]
+          env:
+            - name: MINIO_ENDPOINT
+              value: minio
+            - name: MINIO_PORT
+              value: "9000"
+          volumeMounts:
+            - name: etc-path
+              mountPath: /etc/minio/mc
+            - name: tmp
+              mountPath: /tmp
+            - name: minio-configuration
+              mountPath: /config
+          resources:
+            requests:
+              memory: 128Mi
       containers:
         - name: minio-make-bucket
           image: "quay.io/minio/mc:RELEASE.2023-09-29T16-41-22Z"

@@ -6,5 +6,3 @@ resources:
 - vault-base.yaml
 - ingress.yaml
 - debug-pod.yaml
-# patches:
-# - path: common.yaml
