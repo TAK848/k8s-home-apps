@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-ubuntu
+  labels:
+    component: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: ubuntu
+  template:
+    metadata:
+      labels:
+        component: ubuntu
+    spec:
+      volumes:
+      - name: etc-path
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      - name: minio-configuration
+        projected:
+          sources:
+          - configMap:
+              name: minio
+          - secret:
+              name: minio-root-secret
+          - secret:
+              name: minio-console-secret
+              items:
+              - key: secretKey
+                path: secrets/minio-console-secret/secretKey
+          - secret:
+              name: minio-loki-user-secret
+              items:
+              - key: secretKey
+                path: secrets/minio-loki-user-secret/secretKey
+      serviceAccountName: minio-sa
+      containers:
+      - name: ubuntu
+        image: ubuntu
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "256Mi"
+          requests:
+            cpu: "0.25"
+            memory: "128Mi"
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: test-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: test-secret
+              key: password
+        volumeMounts:
+        - name: etc-path
+          mountPath: /etc/minio/mc
+        - name: tmp
+          mountPath: /tmp
+        - name: minio-configuration
+          mountPath: /config
+
