@@ -5,7 +5,7 @@ resources:
 - namespace.yaml
 # - ../../../components/grafana
 - ../../../components/minio
-# - ../../../components/grafana-loki
+- ../../../components/grafana-loki
 # - ../../../components/promtail
 # - ../../../components/prometheus
 # - ../../../components/prometheus-operator
