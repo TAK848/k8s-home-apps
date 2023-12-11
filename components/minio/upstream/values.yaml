@@ -87,8 +87,8 @@ runtimeClassName: ""
 ## AccessKey and secretKey is generated when not set
 ## Distributed MinIO ref: https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html
 ##
-rootUser: ""
-rootPassword: ""
+rootUser: "admin"
+rootPassword: "password"
 
 ## Use existing Secret that store following variables:
 ##
@@ -100,7 +100,7 @@ rootPassword: ""
 ## All mentioned variables will be ignored in values file.
 ## .data.rootUser and .data.rootPassword are mandatory,
 ## others depend on enabled status of corresponding sections.
-existingSecret: "minio-root-secret"
+# existingSecret: "minio-root-secret"
 
 ## Directory on the MinIO pof
 certsPath: "/etc/minio/certs/"
@@ -367,8 +367,9 @@ users:
 ## NOTE: this will fail if LDAP is enabled in your MinIO deployment
 ## make sure to disable this if you are using LDAP.
 - accessKey: console
-  existingSecret: minio-console-secret
-  existingSecretKey: secretKey
+  secretKey: console123
+  # existingSecret: minio-console-secret
+  # existingSecretKey: secretKey
   policy: consoleAdmin
 # - accessKey: loki
 #   existingSecret: minio-loki-user-secret

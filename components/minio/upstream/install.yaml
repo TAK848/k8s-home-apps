@@ -5,6 +5,21 @@ kind: ServiceAccount
 metadata:
   name: "minio-sa"
 ---
+# Source: minio/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: minio
+  labels:
+    app: minio
+    chart: minio-5.0.14
+    release: minio
+    heritage: Helm
+type: Opaque
+data:
+  rootUser: "YWRtaW4="
+  rootPassword: "cGFzc3dvcmQ="
+---
 # Source: minio/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -218,11 +233,8 @@ data:
     
     # Create the users
     echo console > $MINIO_ACCESSKEY_SECRETKEY_TMP
-    cat /config/secrets/minio-console-secret/secretKey >> $MINIO_ACCESSKEY_SECRETKEY_TMP
-    # Add a new line if it doesn't exist
-    sed -i '$a\' $MINIO_ACCESSKEY_SECRETKEY_TMP
+    echo console123 >> $MINIO_ACCESSKEY_SECRETKEY_TMP
     createUser consoleAdmin
-    
     
   add-policy: |-
     #!/bin/sh
@@ -504,8 +516,8 @@ spec:
         app: minio
         release: minio
       annotations:
-        checksum/secrets: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
-        checksum/config: a14ba152986c1b99f5cf61df14a211042f3995d31c4fe12aedc62155501c686c
+        checksum/secrets: 3d0af2a708116035b3d59eb176e9f50b986f0c41f201a34b07b9cc5328f4e607
+        checksum/config: c713b8cf323d93151279854ec311bad62f7c55fab53b791c236c04bd2b66bc6a
     spec:
       securityContext:
         runAsUser: 1000
@@ -534,12 +546,12 @@ spec:
             - name: MINIO_ROOT_USER
               valueFrom:
                 secretKeyRef:
-                  name: minio-root-secret
+                  name: minio
                   key: rootUser
             - name: MINIO_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: minio-root-secret
+                  name: minio
                   key: rootPassword
             - name: MINIO_PROMETHEUS_AUTH_TYPE
               value: "public"
@@ -549,7 +561,7 @@ spec:
       volumes:
         - name: minio-user
           secret:
-            secretName: minio-root-secret        
+            secretName: minio        
   volumeClaimTemplates:
     - metadata:
         name: export
@@ -591,12 +603,7 @@ spec:
               - configMap:
                   name: minio
               - secret:
-                  name: minio-root-secret
-              - secret:
-                  name: minio-console-secret
-                  items:
-                    - key: secretKey
-                      path: secrets/minio-console-secret/secretKey
+                  name: minio
       serviceAccountName: minio-sa
       containers:
         - name: minio-make-bucket
