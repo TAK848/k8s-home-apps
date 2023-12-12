@@ -90,13 +90,6 @@ metadata:
     app.kubernetes.io/component: canary
 automountServiceAccountToken: true
 ---
-# Source: loki/templates/monitoring/grafana-agent.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: loki-grafana-agent
-  namespace: logging
----
 # Source: loki/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
@@ -126,16 +119,18 @@ metadata:
 data:
   config.yaml: |
     
-    auth_enabled: true
+    auth_enabled: false
     common:
       compactor_address: 'loki-backend'
       path_prefix: /var/loki
-      replication_factor: 3
+      replication_factor: 2
       storage:
         s3:
+          access_key_id: ${MINIO_ACCESS_KEY}
           bucketnames: loki-chunks
-          insecure: false
-          s3forcepathstyle: false
+          insecure: true
+          s3forcepathstyle: true
+          secret_access_key: ${MINIO_SECRET_ACCESS_KEY}
     frontend:
       scheduler_address: query-scheduler-discovery.logging.svc.cluster.local.:9095
     frontend_worker:
@@ -155,9 +150,11 @@ data:
     ruler:
       storage:
         s3:
+          access_key_id: ${MINIO_ACCESS_KEY}
           bucketnames: loki-ruler
-          insecure: false
-          s3forcepathstyle: false
+          insecure: true
+          s3forcepathstyle: true
+          secret_access_key: ${MINIO_SECRET_ACCESS_KEY}
         type: s3
     runtime_config:
       file: /etc/loki/runtime-config/runtime-config.yaml
@@ -492,40 +489,6 @@ rules:
   resources: ["configmaps", "secrets"]
   verbs: ["get", "watch", "list"]
 ---
-# Source: loki/templates/monitoring/grafana-agent.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: loki-grafana-agent
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - nodes
-  - nodes/proxy
-  - nodes/metrics
-  - services
-  - endpoints
-  - pods
-  - events
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses
-  verbs:
-  - get
-  - list
-  - watch
-- nonResourceURLs:
-  - /metrics
-  - /metrics/cadvisor
-  verbs:
-  - get
----
 # Source: loki/charts/grafana-agent-operator/templates/operator-clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -566,20 +529,6 @@ roleRef:
   kind: ClusterRole
   name: loki-clusterrole
   apiGroup: rbac.authorization.k8s.io
----
-# Source: loki/templates/monitoring/grafana-agent.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: loki-grafana-agent
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: loki-grafana-agent
-subjects:
-- kind: ServiceAccount
-  name: loki-grafana-agent
-  namespace: logging
 ---
 # Source: loki/templates/backend/query-scheduler-discovery.yaml
 apiVersion: v1
@@ -913,8 +862,6 @@ spec:
             - -addr=loki-gateway.logging.svc.cluster.local.:80
             - -labelname=pod
             - -labelvalue=$(POD_NAME)
-            - -user=self-monitoring
-            - -tenant-id=self-monitoring
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -1074,7 +1021,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: read
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 0
@@ -1088,7 +1035,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 2b50d023a03699afffb48f96f2937581a665bf5474266aa6b2be46acf84a9354
+        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
       labels:
         app.kubernetes.io/part-of: memberlist
         app.kubernetes.io/name: loki
@@ -1113,6 +1060,7 @@ spec:
             - -target=read
             - -legacy-read-mode=false
             - -common.compactor-grpc-address=loki-backend.logging.svc.cluster.local:9095
+            - -config.expand-env=true
           ports:
             - name: http-metrics
               containerPort: 3100
@@ -1123,6 +1071,17 @@ spec:
             - name: http-memberlist
               containerPort: 7946
               protocol: TCP
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: accesskey
+                  name: loki-minio-loki-user-secret
+            - name: MINIO_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -1186,7 +1145,7 @@ metadata:
     app.kubernetes.io/component: backend
     app.kubernetes.io/part-of: memberlist
 spec:
-  replicas: 3
+  replicas: 2
   podManagementPolicy: Parallel
   updateStrategy:
     rollingUpdate:
@@ -1205,7 +1164,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 2b50d023a03699afffb48f96f2937581a665bf5474266aa6b2be46acf84a9354
+        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -1250,6 +1209,7 @@ spec:
             - -config.file=/etc/loki/config/config.yaml
             - -target=backend
             - -legacy-read-mode=false
+            - -config.expand-env=true
           ports:
             - name: http-metrics
               containerPort: 3100
@@ -1260,6 +1220,17 @@ spec:
             - name: http-memberlist
               containerPort: 7946
               protocol: TCP
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: accesskey
+                  name: loki-minio-loki-user-secret
+            - name: MINIO_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -1336,7 +1307,7 @@ metadata:
     app.kubernetes.io/component: write
     app.kubernetes.io/part-of: memberlist
 spec:
-  replicas: 3
+  replicas: 2
   podManagementPolicy: Parallel
   updateStrategy:
     rollingUpdate:
@@ -1351,7 +1322,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 2b50d023a03699afffb48f96f2937581a665bf5474266aa6b2be46acf84a9354
+        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -1375,6 +1346,7 @@ spec:
           args:
             - -config.file=/etc/loki/config/config.yaml
             - -target=write
+            - -config.expand-env=true
           ports:
             - name: http-metrics
               containerPort: 3100
@@ -1385,6 +1357,17 @@ spec:
             - name: http-memberlist
               containerPort: 7946
               protocol: TCP
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: accesskey
+                  name: loki-minio-loki-user-secret
+            - name: MINIO_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretkey
+                  name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -1437,103 +1420,6 @@ spec:
         resources:
           requests:
             storage: "10Gi"
----
-# Source: loki/templates/monitoring/grafana-agent.yaml
-apiVersion: monitoring.grafana.com/v1alpha1
-kind: GrafanaAgent
-metadata:
-  name: loki
-  namespace: logging
-  labels:
-    helm.sh/chart: loki-5.39.0
-    app.kubernetes.io/name: loki
-    app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
-    app.kubernetes.io/managed-by: Helm
-spec:
-  serviceAccountName: loki-grafana-agent
-  enableConfigReadAPI: false
-  
-  logs:
-    instanceSelector:
-      matchLabels:
-        app.kubernetes.io/name: loki
-        app.kubernetes.io/instance: loki
----
-# Source: loki/templates/monitoring/logs-instance.yaml
-apiVersion: monitoring.grafana.com/v1alpha1
-kind: LogsInstance
-metadata:
-  name: loki
-  namespace: logging
-  labels:
-    helm.sh/chart: loki-5.39.0
-    app.kubernetes.io/name: loki
-    app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
-    app.kubernetes.io/managed-by: Helm
-spec:
-  clients:
-    - url: http://loki-gateway.logging.svc.cluster.local/loki/api/v1/push
-      externalLabels:
-        cluster: loki
-      tenantId: "self-monitoring"
-
-  podLogsNamespaceSelector: {}
-
-  podLogsSelector:
-    matchLabels:
-      app.kubernetes.io/name: loki
-      app.kubernetes.io/instance: loki
----
-# Source: loki/templates/monitoring/pod-logs.yaml
-apiVersion: monitoring.grafana.com/v1alpha1
-kind: PodLogs
-metadata:
-  name: loki
-  namespace: logging
-  labels:
-    helm.sh/chart: loki-5.39.0
-    app.kubernetes.io/name: loki
-    app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
-    app.kubernetes.io/managed-by: Helm
-spec:
-  pipelineStages:
-    - cri: { }
-  relabelings:
-    - sourceLabels:
-        - __meta_kubernetes_pod_node_name
-      targetLabel: __host__
-    - action: labelmap
-      regex: __meta_kubernetes_pod_label_(.+)
-    - action: replace
-      replacement: "$1"
-      separator: "-"
-      sourceLabels:
-        - __meta_kubernetes_pod_label_app_kubernetes_io_name
-        - __meta_kubernetes_pod_label_app_kubernetes_io_component
-      targetLabel: __service__
-    - action: replace
-      replacement: "$1"
-      separator: "/"
-      sourceLabels:
-        - __meta_kubernetes_namespace
-        - __service__
-      targetLabel: job
-    - action: replace
-      sourceLabels:
-        - __meta_kubernetes_pod_container_name
-      targetLabel: container
-    - replacement: "loki"
-      targetLabel: cluster
-  namespaceSelector:
-    matchNames:
-      - logging
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: loki
-      app.kubernetes.io/instance: loki
 ---
 # Source: loki/charts/grafana-agent-operator/templates/tests/test-grafanaagent.yaml
 apiVersion: v1
@@ -1617,34 +1503,6 @@ spec:
   - name: sleep
     image: busybox
     command: ['sleep', '60']
-  restartPolicy: Never
----
-# Source: loki/templates/tests/test-canary.yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: "loki-helm-test"
-  namespace: logging
-  labels:
-    helm.sh/chart: loki-5.39.0
-    app.kubernetes.io/name: loki
-    app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: helm-test
-  annotations:
-    "helm.sh/hook": test
-spec:
-  containers:
-    - name: loki-helm-test
-      image: docker.io/grafana/loki-helm-test:latest
-      env:
-        - name: CANARY_PROMETHEUS_ADDRESS
-          value: "http://prometheus:9090"
-        - name: CANARY_TEST_TIMEOUT
-          value: "1m"
-      args:
-        - -test.v
   restartPolicy: Never
 ---
 # Source: loki/charts/grafana-agent-operator/templates/tests/test-grafanaagent.yaml

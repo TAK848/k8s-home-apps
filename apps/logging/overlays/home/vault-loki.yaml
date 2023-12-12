@@ -1,0 +1,25 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: loki-vault-auth
+spec:
+  vaultConnectionRef: vault-connection
+  method: kubernetes
+  mount: k8s-logging-path
+  kubernetes:
+    role: loki-role
+    serviceAccount: loki
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: loki-minio-loki-static-secret
+spec:
+  vaultAuthRef: loki-vault-auth
+  mount: homek8s
+  path: logging/minio/loki-secret
+  type: kv-v2
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: loki-minio-loki-user-secret # secret name
