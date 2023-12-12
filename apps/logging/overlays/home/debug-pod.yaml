@@ -57,4 +57,12 @@ spec:
           mountPath: /tmp
         - name: minio-configuration
           mountPath: /config
+        env:
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: accesskey
+              # name: loki-minio-loki-user-secret
+              name: minio-loki-user-secret
+
 
