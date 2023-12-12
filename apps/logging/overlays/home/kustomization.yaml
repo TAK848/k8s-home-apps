@@ -4,5 +4,7 @@ namespace: logging
 resources:
 - ../../base
 - vault-base.yaml
+- vault-minio.yaml
+- vault-loki.yaml
 - ingress.yaml
 - debug-pod.yaml
