@@ -966,12 +966,12 @@ spec:
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: accesskey
+                  key: accessKey
                   name: loki-minio-loki-user-secret
             - name: MINIO_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: secretkey
+                  key: secretKey
                   name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false
@@ -1115,12 +1115,12 @@ spec:
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: accesskey
+                  key: accessKey
                   name: loki-minio-loki-user-secret
             - name: MINIO_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: secretkey
+                  key: secretKey
                   name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false
@@ -1252,12 +1252,12 @@ spec:
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: accesskey
+                  key: accessKey
                   name: loki-minio-loki-user-secret
             - name: MINIO_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  key: secretkey
+                  key: secretKey
                   name: loki-minio-loki-user-secret
           securityContext:
             allowPrivilegeEscalation: false

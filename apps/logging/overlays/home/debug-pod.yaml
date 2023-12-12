@@ -61,7 +61,7 @@ spec:
         - name: MINIO_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              key: accesskey
+              key: accessKey
               # name: loki-minio-loki-user-secret
               name: minio-loki-user-secret
 

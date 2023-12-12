@@ -797,12 +797,12 @@ write:
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: accesskey
+        key: accessKey
   - name: MINIO_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: secretkey
+        key: secretKey
   # -- Environment variables from secrets or configmaps to add to the write pods
   extraEnvFrom: []
   # -- Lifecycle for the write container
@@ -1002,12 +1002,12 @@ read:
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: accesskey
+        key: accessKey
   - name: MINIO_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: secretkey
+        key: secretKey
   # -- Environment variables from secrets or configmaps to add to the read pods
   extraEnvFrom: []
   # -- Lifecycle for the read container
@@ -1117,12 +1117,12 @@ backend:
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: accesskey
+        key: accessKey
   - name: MINIO_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         name: loki-minio-loki-user-secret
-        key: secretkey
+        key: secretKey
   # -- Environment variables from secrets or configmaps to add to the backend pods
   extraEnvFrom: []
   # -- Init containers to add to the backend pods
