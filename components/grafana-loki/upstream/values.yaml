@@ -687,7 +687,7 @@ monitoring:
   # The Loki canary pushes logs to and queries from this loki installation to test
   # that it's working correctly
   lokiCanary:
-    enabled: true
+    enabled: false
     # -- The name of the label to look for at loki when doing the checks.
     labelname: pod
     # -- Additional annotations for the `loki-canary` Daemonset
