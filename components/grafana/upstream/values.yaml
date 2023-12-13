@@ -51,9 +51,9 @@ headlessService: true
 ## Create HorizontalPodAutoscaler object for deployment type
 #
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 5
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 3
   targetCPU: "60"
   targetMemory: ""
   behavior: {}
@@ -68,7 +68,8 @@ podDisruptionBudget: {}
 ## See `kubectl explain deployment.spec.strategy` for more
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
 deploymentStrategy:
-  type: RollingUpdate
+  # type: RollingUpdate
+  type: Recreate
 
 readinessProbe:
   httpGet:
@@ -340,8 +341,8 @@ persistence:
   enabled: true
   # storageClassName: default
   accessModes:
-  # - ReadWriteOnce
-  - ReadWriteMany
+  - ReadWriteOnce
+  # - ReadWriteMany
   size: 10Gi
   # annotations: {}
   finalizers:
