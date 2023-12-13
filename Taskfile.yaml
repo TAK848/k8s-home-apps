@@ -17,6 +17,7 @@ tasks:
     cmds:
     - helm template loki grafana/loki -n logging -f components/grafana-loki/upstream/values.yaml  > components/grafana-loki/upstream/install.yaml
     - helm template minio minio/minio -n MINIO_NAMESPACE_PLACEHOLDER -f components/minio/upstream/values.yaml  > components/minio/upstream/install.yaml
+    - helm template grafana-agent -n logging grafana/grafana-agent -f components/grafana-agent/upstream/values.yaml  > components/grafana-agent/upstream/install.yaml
     - helm template grafana grafana/grafana -f components/grafana/upstream/values.yaml  > components/grafana/upstream/install.yaml
     silent: false
   update-vault:
