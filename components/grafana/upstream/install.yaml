@@ -144,7 +144,7 @@ metadata:
     app.kubernetes.io/version: "10.2.2"
     app.kubernetes.io/managed-by: Helm
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -233,6 +233,13 @@ spec:
             httpGet:
               path: /api/health
               port: 3000
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
       volumes:
         - name: config
           configMap:
