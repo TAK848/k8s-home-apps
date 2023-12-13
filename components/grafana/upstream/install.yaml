@@ -56,7 +56,7 @@ metadata:
     - kubernetes.io/pvc-protection
 spec:
   accessModes:
-    - "ReadWriteOnce"
+    - "ReadWriteMany"
   resources:
     requests:
       storage: "10Gi"
