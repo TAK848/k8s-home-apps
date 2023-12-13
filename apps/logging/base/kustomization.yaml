@@ -3,10 +3,10 @@ kind: Kustomization
 namespace: logging
 resources:
 - namespace.yaml
-# - ../../../components/grafana
 - ../../../components/minio
 - ../../../components/grafana-loki
 - ../../../components/grafana-agent
+- ../../../components/grafana
 # - ../../../components/promtail
 # - ../../../components/prometheus
 # - ../../../components/prometheus-operator

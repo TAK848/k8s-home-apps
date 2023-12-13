@@ -6,5 +6,6 @@ resources:
 - vault-base.yaml
 - vault-minio.yaml
 - vault-loki.yaml
+- vault-grafana.yaml
 - ingress.yaml
 - debug-pod.yaml

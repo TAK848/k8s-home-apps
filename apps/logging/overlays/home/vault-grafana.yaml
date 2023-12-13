@@ -1,0 +1,25 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: grafana-vault-auth
+spec:
+  vaultConnectionRef: vault-connection
+  method: kubernetes
+  mount: k8s-logging-path
+  kubernetes:
+    role: grafana-role
+    serviceAccount: grafana
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: grafana-admin-static-secret
+spec:
+  vaultAuthRef: grafana-vault-auth
+  mount: homek8s
+  path: logging/grafana/admin-secret
+  type: kv-v2
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: grafana-admin-secret # secret name
