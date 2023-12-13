@@ -108,6 +108,28 @@ subjects:
   name: grafana
   namespace: logging
 ---
+# Source: grafana/templates/headless-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-headless
+  namespace: logging
+  labels:
+    helm.sh/chart: grafana-7.0.11
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/version: "10.2.2"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+  type: ClusterIP
+  ports:
+  - name: gossip-tcp
+    port: 9094
+---
 # Source: grafana/templates/service.yaml
 apiVersion: v1
 kind: Service

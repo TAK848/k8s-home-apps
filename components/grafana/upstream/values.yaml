@@ -46,7 +46,7 @@ serviceAccount:
 replicas: 2
 
 ## Create a headless service for the deployment
-headlessService: false
+headlessService: true
 
 ## Create HorizontalPodAutoscaler object for deployment type
 #
