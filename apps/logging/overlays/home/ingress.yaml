@@ -51,10 +51,7 @@ spec:
               number: 9094
   tls:
   - hosts:
-    - minio.logging.home.tak848.me
-    - minio-console.logging.home.tak848.me
-    - grafana.logging.home.tak848.me
-    - grafana-hl.logging.home.tak848.me
+    - "*.logging.home.tak848.me"
     secretName: logging-ingress-cert-secret
 ---
 apiVersion: cert-manager.io/v1
