@@ -406,6 +406,46 @@ spec:
           volumeMounts:
             - name: sc-dashboard-volume
               mountPath: "/tmp/dashboards"
+        - name: grafana-sc-datasources
+          image: "quay.io/kiwigrid/k8s-sidecar:1.25.2"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: METHOD
+              value: WATCH
+            - name: LABEL
+              value: "grafana_datasource"
+            - name: LABEL_VALUE
+              value: "1"
+            - name: FOLDER
+              value: "/etc/grafana/provisioning/datasources"
+            - name: RESOURCE
+              value: "both"
+            - name: NAMESPACE
+              value: "ALL"
+            - name: REQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-secret
+                  key: admin-user
+            - name: REQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-secret
+                  key: admin-password
+            - name: REQ_URL
+              value: http://localhost:3000/api/admin/provisioning/datasources/reload
+            - name: REQ_METHOD
+              value: POST
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: sc-datasources-volume
+              mountPath: "/etc/grafana/provisioning/datasources"
         - name: grafana
           image: "docker.io/grafana/grafana:10.2.2"
           imagePullPolicy: IfNotPresent
@@ -430,6 +470,8 @@ spec:
             - name: sc-dashboard-provider
               mountPath: "/etc/grafana/provisioning/dashboards/sc-dashboardproviders.yaml"
               subPath: provider.yaml
+            - name: sc-datasources-volume
+              mountPath: "/etc/grafana/provisioning/datasources"
           ports:
             - name: grafana
               containerPort: 3000
@@ -497,6 +539,9 @@ spec:
         - name: sc-dashboard-provider
           configMap:
             name: grafana-config-dashboards
+        - name: sc-datasources-volume
+          emptyDir:
+            {}
 ---
 # Source: grafana/templates/tests/test-serviceaccount.yaml
 apiVersion: v1
