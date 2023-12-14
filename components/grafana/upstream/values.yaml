@@ -343,7 +343,8 @@ extraContainerVolumes: []
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
 persistence:
-  type: pvc
+  # type: pvc
+  type: statefulset
   enabled: true
   # storageClassName: default
   accessModes:
@@ -811,6 +812,14 @@ grafana.ini:
   #   enabled: true
   #   allow_sign_up: true
   #   config_file: /etc/grafana/ldap.toml
+  unified_alerting:
+    enabled: true
+    ha_peers: grafana-headless:9094
+    ha_listen_address: ${POD_IP}:9094
+    ha_advertise_address: ${POD_IP}:9094
+
+  alerting:
+    enabled: false
 
 ## Grafana's LDAP configuration
 ## Templated by the template in _helpers.tpl
