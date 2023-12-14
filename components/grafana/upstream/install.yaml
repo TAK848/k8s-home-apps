@@ -12,6 +12,32 @@ metadata:
   name: grafana
   namespace: logging
 ---
+# Source: grafana/templates/configmap-dashboard-provider.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    helm.sh/chart: grafana-7.0.11
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/version: "10.2.2"
+    app.kubernetes.io/managed-by: Helm
+  name: grafana-config-dashboards
+  namespace: logging
+data:
+  provider.yaml: |-
+    apiVersion: 1
+    providers:
+      - name: 'sidecarProvider'
+        orgId: 1
+        type: file
+        disableDeletion: false
+        allowUiUpdates: false
+        updateIntervalSeconds: 30
+        options:
+          foldersFromFilesStructure: true
+          path: /tmp/dashboards/General
+---
 # Source: grafana/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -116,6 +142,7 @@ metadata:
     app.kubernetes.io/version: "10.2.2"
     app.kubernetes.io/managed-by: Helm
     dashboard-provider: grafana-dashboards-kubernetes
+    grafana_dashboard: "1"
 data:
   {}
 ---
@@ -151,7 +178,10 @@ metadata:
     app.kubernetes.io/version: "10.2.2"
     app.kubernetes.io/managed-by: Helm
   name: grafana-clusterrole
-rules: []
+rules:
+  - apiGroups: [""] # "" indicates the core API group
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "watch", "list"]
 ---
 # Source: grafana/templates/clusterrolebinding.yaml
 kind: ClusterRoleBinding
@@ -281,8 +311,8 @@ spec:
         app.kubernetes.io/instance: grafana
       annotations:
         checksum/config: 5b1c33970ce687014a80f79d8d54f4681f50af5c5016829565165092b74bccbe
-        checksum/dashboards-json-config: d1e4f71b622e62a8a3585e8ea510d75c048c8e9ddee5a72a0625ed3f069706f7
-        checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/dashboards-json-config: 08c9f88812d02c6f35fde81198d4b449737409495f5962a9b9b306ca56b12c4d
+        checksum/sc-dashboard-provider-config: bd86017c5474b9585e28c9f07a1871a756ae2ed7248740be384f9c373cc5cc6b
         kubectl.kubernetes.io/default-container: grafana
     spec:
       
@@ -334,6 +364,48 @@ spec:
               mountPath: "/var/lib/grafana"
       enableServiceLinks: true
       containers:
+        - name: grafana-sc-dashboard
+          image: "quay.io/kiwigrid/k8s-sidecar:1.25.2"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: METHOD
+              value: WATCH
+            - name: LABEL
+              value: "grafana_dashboard"
+            - name: LABEL_VALUE
+              value: "1"
+            - name: FOLDER
+              value: "/tmp/dashboards/General"
+            - name: RESOURCE
+              value: "both"
+            - name: NAMESPACE
+              value: "ALL"
+            - name: FOLDER_ANNOTATION
+              value: "grafana_folder"
+            - name: REQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-secret
+                  key: admin-user
+            - name: REQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin-secret
+                  key: admin-password
+            - name: REQ_URL
+              value: http://localhost:3000/api/admin/provisioning/dashboards/reload
+            - name: REQ_METHOD
+              value: POST
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: sc-dashboard-volume
+              mountPath: "/tmp/dashboards"
         - name: grafana
           image: "docker.io/grafana/grafana:10.2.2"
           imagePullPolicy: IfNotPresent
@@ -353,6 +425,11 @@ spec:
             - name: config
               mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
               subPath: "dashboardproviders.yaml"
+            - name: sc-dashboard-volume
+              mountPath: "/tmp/dashboards"
+            - name: sc-dashboard-provider
+              mountPath: "/etc/grafana/provisioning/dashboards/sc-dashboardproviders.yaml"
+              subPath: provider.yaml
           ports:
             - name: grafana
               containerPort: 3000
@@ -414,6 +491,12 @@ spec:
         - name: storage
           persistentVolumeClaim:
             claimName: grafana
+        - name: sc-dashboard-volume
+          emptyDir:
+            {}
+        - name: sc-dashboard-provider
+          configMap:
+            name: grafana-config-dashboards
 ---
 # Source: grafana/templates/tests/test-serviceaccount.yaml
 apiVersion: v1
