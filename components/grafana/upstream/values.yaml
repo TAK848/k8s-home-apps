@@ -344,11 +344,11 @@ extraContainerVolumes: []
 ##
 persistence:
   type: pvc
-  enabled: true
+  enabled: false
   # storageClassName: default
   accessModes:
-  # - ReadWriteOnce
-  - ReadWriteMany
+  - ReadWriteOnce
+  # - ReadWriteMany
   size: 10Gi
   # annotations: {}
   finalizers:
