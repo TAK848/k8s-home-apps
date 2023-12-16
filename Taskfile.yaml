@@ -29,3 +29,7 @@ tasks:
     cmds:
     - helm template mysql-operator mysql-operator/mysql-operator -n mysql-operator -f components/mysql-operator/upstream/values.yaml --include-crds > components/mysql-operator/upstream/install.yaml
     silent: false
+  update-mysql-innodbcluster:
+    cmds:
+    - helm template mysql-innodbcluster mysql-operator/mysql-innodbcluster -f components/mysql-innodbcluster/upstream/values.yaml --include-crds > components/mysql-innodbcluster/upstream/install.yaml
+    silent: false

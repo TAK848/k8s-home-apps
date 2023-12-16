@@ -9,3 +9,4 @@ resources:
 - vault-grafana.yaml
 - ingress.yaml
 - debug-pod.yaml
+- grafana-mysql.yaml

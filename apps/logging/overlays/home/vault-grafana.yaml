@@ -23,3 +23,17 @@ spec:
   destination:
     create: true
     name: grafana-admin-secret # secret name
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: grafana-mysql-root-static-secret
+spec:
+  vaultAuthRef: grafana-vault-auth
+  mount: homek8s
+  path: logging/grafana/mysql-root
+  type: kv-v2
+  refreshAfter: 60s
+  destination:
+    create: true
+    name: grafana-mysql-innodbcluster-cluster-secret # secret name
