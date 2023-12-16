@@ -162,7 +162,7 @@ spec:
                           pattern:  '^ocid1\.key\.'
                         endpoints:
                           type: object
-                          description: ""
+                          # description: ""
                           properties:
                             encryption:
                               type: string
