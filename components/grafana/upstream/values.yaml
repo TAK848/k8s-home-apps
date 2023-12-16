@@ -43,7 +43,7 @@ serviceAccount:
   #    eks.amazonaws.com/role-arn: arn:aws:iam::123456789000:role/iam-role-name-here
   autoMount: true
 
-replicas: 1
+replicas: 2
 
 ## Create a headless service for the deployment
 headlessService: true
@@ -345,7 +345,7 @@ extraContainerVolumes: []
 persistence:
   # type: pvc
   type: statefulset
-  enabled: true
+  enabled: false
   # storageClassName: default
   accessModes:
   - ReadWriteOnce
@@ -456,7 +456,10 @@ admin:
 ## 6. uncomment the annotation section in the serviceAccount: above
 ## make sure to replace arn:aws:iam::123456789000:role/iam-role-name-here with your role arn
 
-env: {}
+# env: {}
+env:
+  GF_DATABASE_TYPE: mysql
+  GF_DATABASE_HOST: mysql-innodbcluster
 
 ## "valueFrom" environment variable references that will be added to deployment pods. Name is templated.
 ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#envvarsource-v1-core
@@ -466,7 +469,16 @@ env: {}
 ##     - name: <key>
 ##       valueFrom:
 ##         <value rendered as YAML>
-envValueFrom: {}
+# envValueFrom: {}
+envValueFrom:
+  GF_DATABASE_USER:
+    secretKeyRef:
+      name: grafana-mysql-innodbcluster-cluster-secret
+      key: rootUser
+  GF_DATABASE_PASSWORD:
+    secretKeyRef:
+      name: grafana-mysql-innodbcluster-cluster-secret
+      key: rootPassword
 #  ENV_NAME:
 #    configMapKeyRef:
 #      name: configmap-name
@@ -820,6 +832,11 @@ grafana.ini:
 
   alerting:
     enabled: false
+
+  # database:
+  #   type: mysql
+  #   host: abc
+  #   aaaa: aaaa
 
 ## Grafana's LDAP configuration
 ## Templated by the template in _helpers.tpl

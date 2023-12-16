@@ -6,10 +6,10 @@ metadata:
   name: loki-backend
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: backend
 spec:
@@ -27,10 +27,10 @@ metadata:
   name: loki-read
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: read
 spec:
@@ -48,10 +48,10 @@ metadata:
   name: loki-write
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: write
 spec:
@@ -69,10 +69,10 @@ metadata:
   name: loki
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
 automountServiceAccountToken: true
 ---
@@ -83,10 +83,10 @@ metadata:
   name: loki
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
 data:
   config.yaml: |
@@ -157,10 +157,10 @@ metadata:
   name: loki-gateway
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: gateway
 data:
@@ -326,10 +326,10 @@ metadata:
   name: loki-dashboards-1
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     grafana_dashboard: "1"
 data:
@@ -351,10 +351,10 @@ metadata:
   name: loki-dashboards-2
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     grafana_dashboard: "1"
 data:
@@ -376,10 +376,10 @@ metadata:
   name: loki-runtime
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
 data:
   runtime-config.yaml: |
@@ -390,10 +390,10 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
   name: loki-clusterrole
 rules:
@@ -407,10 +407,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: loki-clusterrolebinding
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
 subjects:
   - kind: ServiceAccount
@@ -486,10 +486,10 @@ metadata:
   name: loki-backend
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: backend
   annotations:
@@ -516,10 +516,10 @@ metadata:
   name: loki-gateway
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: gateway
   annotations:
@@ -573,10 +573,10 @@ metadata:
   name: loki-read
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: read
   annotations:
@@ -603,10 +603,10 @@ metadata:
   name: loki-memberlist
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -659,10 +659,10 @@ metadata:
   name: loki-write
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: write
   annotations:
@@ -689,10 +689,10 @@ metadata:
   name: loki-gateway
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: gateway
 spec:
@@ -708,7 +708,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: a8fc03ae8bf5a52260460a32eae1cc8a3905e95a303cd14734614a71def41cfe
+        checksum/config: 594100c3589ed8a69950bf20e051e8368bdc869b2924b93e9fa25a403c16fb05
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -779,10 +779,10 @@ metadata:
   namespace: logging
   labels:
     app.kubernetes.io/part-of: memberlist
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: read
 spec:
@@ -800,7 +800,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
+        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
       labels:
         app.kubernetes.io/part-of: memberlist
         app.kubernetes.io/name: loki
@@ -818,7 +818,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: loki
-          image: docker.io/grafana/loki:2.9.2
+          image: docker.io/grafana/loki:2.9.3
           imagePullPolicy: IfNotPresent
           args:
             - -config.file=/etc/loki/config/config.yaml
@@ -902,10 +902,10 @@ metadata:
   name: loki-backend
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: backend
     app.kubernetes.io/part-of: memberlist
@@ -929,7 +929,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
+        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -968,7 +968,7 @@ spec:
             - name: sc-rules-volume
               mountPath: "/rules"
         - name: loki
-          image: docker.io/grafana/loki:2.9.2
+          image: docker.io/grafana/loki:2.9.3
           imagePullPolicy: IfNotPresent
           args:
             - -config.file=/etc/loki/config/config.yaml
@@ -1064,10 +1064,10 @@ metadata:
   name: loki-write
   namespace: logging
   labels:
-    helm.sh/chart: loki-5.39.0
+    helm.sh/chart: loki-5.41.4
     app.kubernetes.io/name: loki
     app.kubernetes.io/instance: loki
-    app.kubernetes.io/version: "2.9.2"
+    app.kubernetes.io/version: "2.9.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: write
     app.kubernetes.io/part-of: memberlist
@@ -1087,7 +1087,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: f39d92a109053a1a5ac19311b9df4f7316a0871605d7e3df1ada54870d61a920
+        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -1106,7 +1106,7 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: loki
-          image: docker.io/grafana/loki:2.9.2
+          image: docker.io/grafana/loki:2.9.3
           imagePullPolicy: IfNotPresent
           args:
             - -config.file=/etc/loki/config/config.yaml
