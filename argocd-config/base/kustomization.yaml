@@ -10,3 +10,4 @@ resources:
 - test.yaml
 - vault.yaml
 - vault-secrets-operator.yaml
+- mysql-operator.yaml

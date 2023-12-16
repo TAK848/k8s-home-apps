@@ -25,3 +25,7 @@ tasks:
     - helm template vault hashicorp/vault -f components/vault/upstream/values.yaml > components/vault/upstream/install.yaml
     - helm template vso hashicorp/vault-secrets-operator -f components/vault-secrets-operator/upstream/values.yaml --include-crds > components/vault-secrets-operator/upstream/install.yaml
     silent: false
+  update-mysql-operator:
+    cmds:
+    - helm template mysql-operator mysql-operator/mysql-operator -n mysql-operator -f components/mysql-operator/upstream/values.yaml > components/mysql-operator/upstream/install.yaml
+    silent: false

@@ -9,4 +9,5 @@ patches:
 - path: metallb.yaml
 - path: vault.yaml
 - path: vault-secrets-operator.yaml
+- path: mysql-operator.yaml
 - path: logging.yaml
