@@ -330,6 +330,34 @@ spec:
               subPath: download_dashboards.sh
             - name: storage
               mountPath: "/var/lib/grafana"
+        - command:
+          - /bin/bash
+          - -c
+          - |
+            set -ex
+            count=0
+            max_count=30  # タイムアウトまでの試行回数（例: 30回）
+        
+            until mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
+              sleep 1
+              count=$((count+1))
+            done
+        
+            if [ "$count" -eq "$max_count" ]; then
+              echo "タイムアウト：MySQLサーバーが利用可能になりませんでした。"
+              exit 1
+            fi
+        
+            mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS grafana"
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: rootPassword
+                name: grafana-mysql-innodbcluster-cluster-secret
+          image: mysql:8
+          imagePullPolicy: IfNotPresent
+          name: create-mysql-db
       enableServiceLinks: true
       containers:
         - name: grafana-sc-dashboard
