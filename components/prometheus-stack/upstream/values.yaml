@@ -961,7 +961,7 @@ grafana:
         exit 1
       fi
 
-      mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS `grafana-loki`"
+      mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS grafana_loki"
     env:
     - name: MYSQL_HOST
       value: grafana-mysql-innodbcluster
@@ -973,7 +973,7 @@ grafana:
   env:
     GF_DATABASE_TYPE: mysql
     GF_DATABASE_HOST: grafana-mysql-innodbcluster
-    GF_DATABASE_NAME: grafana-loki
+    GF_DATABASE_NAME: grafana_loki
   envValueFrom:
     GF_DATABASE_USER:
       secretKeyRef:
