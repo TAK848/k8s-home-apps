@@ -324,7 +324,7 @@ extraInitContainers:
     count=0
     max_count=30  # タイムアウトまでの試行回数（例: 30回）
 
-    until mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
+    until mysql -h mysql-innodbcluster -uroot -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
       sleep 1
       count=$((count+1))
     done
@@ -334,7 +334,7 @@ extraInitContainers:
       exit 1
     fi
 
-    mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS grafana"
+    mysql -h mysql-innodbcluster -uroot -e "CREATE DATABASE IF NOT EXISTS grafana"
   # - /bin/bash
   # - -c
   # - |
@@ -347,11 +347,16 @@ extraInitContainers:
   #   set -ex
   #   mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS grafana"
   env:
-  - name: MYSQL_ROOT_PASSWORD
+  - name: MYSQL_PWD
     valueFrom:
       secretKeyRef:
         name: grafana-mysql-innodbcluster-cluster-secret
         key: rootPassword
+        # - name: MYSQL_ROOT_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: grafana-mysql-innodbcluster-cluster-secret
+        #       key: rootPassword
         # resources: {}
         # securityContext:
         #   runAsNonRoot: false
