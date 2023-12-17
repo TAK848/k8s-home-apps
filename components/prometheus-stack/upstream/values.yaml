@@ -938,6 +938,11 @@ grafana:
     requests:
       cpu: 200m
       memory: 128Mi
+  admin:
+    ## Name of the secret. Can be templated.
+    existingSecret: grafana-admin-secret
+    userKey: admin-user
+    passwordKey: admin-password
 
   extraInitContainers:
   - name: create-mysql-db
