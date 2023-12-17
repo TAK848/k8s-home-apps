@@ -324,7 +324,7 @@ extraInitContainers:
     count=0
     max_count=30  # タイムアウトまでの試行回数（例: 30回）
 
-    until mysql -h mysql-innodbcluster -uroot -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
+    until mysql -h ${MYSQL_HOST} -uroot -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
       sleep 1
       count=$((count+1))
     done
@@ -334,43 +334,15 @@ extraInitContainers:
       exit 1
     fi
 
-    mysql -h mysql-innodbcluster -uroot -e "CREATE DATABASE IF NOT EXISTS grafana"
-  # - /bin/bash
-  # - -c
-  # - |
-  #   set -ex
-  #   until mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "SELECT 1"; do sleep 1; done
-  #   mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS grafana"
-  # - /bin/bash
-  # - -c
-  # - |
-  #   set -ex
-  #   mysql -h mysql-innodbcluster -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS grafana"
+    mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS grafana"
   env:
+  - name: MYSQL_HOST
+    value: grafana-mysql-innodbcluster
   - name: MYSQL_PWD
     valueFrom:
       secretKeyRef:
         name: grafana-mysql-innodbcluster-cluster-secret
         key: rootPassword
-        # - name: MYSQL_ROOT_PASSWORD
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: grafana-mysql-innodbcluster-cluster-secret
-        #       key: rootPassword
-        # resources: {}
-        # securityContext:
-        #   runAsNonRoot: false
-        #   runAsUser: 0
-        #   seccompProfile:
-        #     type: RuntimeDefault
-        #   capabilities:
-        #     add:
-        #     - CHOWN
-        # volumeMounts:
-        # - name: mysql-innodbcluster-cluster-secret
-        #   mountPath: /etc/mysql-innodbcluster-cluster-secret
-        #   readOnly: true
-        #   subPath: ""
 
 ## Enable an Specify container in extraContainers. This is meant to allow adding an authentication proxy to a grafana pod
 extraContainers: ""
@@ -518,7 +490,7 @@ admin:
 # env: {}
 env:
   GF_DATABASE_TYPE: mysql
-  GF_DATABASE_HOST: mysql-innodbcluster
+  GF_DATABASE_HOST: grafana-mysql-innodbcluster
 
 ## "valueFrom" environment variable references that will be added to deployment pods. Name is templated.
 ## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#envvarsource-v1-core

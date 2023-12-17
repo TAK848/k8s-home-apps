@@ -145,27 +145,28 @@ datadirVolumeClaimTemplate:
     requests:
       storage: 10Gi
 
-#initDB:
-#  dump:
-#    name:
-#    path:
-#    options:
-#      includeSchemas:
-#    ociObjectStorage:
-#      prefix:
-#      bucketName:
-#      credentials:
-#    s3:
-#      prefix:
-#      config:
-#      bucketName:
-#      profile:
-#      endpoint
-#    azure:
-#      prefix:
-#      config:
-#      containerName:
-#    persistentVolumeClaim:
+initDB:
+  dump:
+    name: aaa
+    path: /docker-entrypoint-initdb.d
+    #    options:
+    #      includeSchemas:
+    #    ociObjectStorage:
+    #      prefix:
+    #      bucketName:
+    #      credentials:
+    #    s3:
+    #      prefix:
+    #      config:
+    #      bucketName:
+    #      profile:
+    #      endpoint
+    #    azure:
+    #      prefix:
+    #      config:
+    #      containerName:
+    persistentVolumeClaim:
+      claimName: backup-volume-claim-1
 #  clone:
 #    donorUrl:
 #    rootUser:

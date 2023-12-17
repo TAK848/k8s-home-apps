@@ -20,7 +20,7 @@
 apiVersion: mysql.oracle.com/v2
 kind: InnoDBCluster
 metadata:
-  name: mysql-innodbcluster
+  name: grafana-mysql-innodbcluster
   # namespace: default
 spec:
   instances: 3

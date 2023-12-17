@@ -40,6 +40,13 @@ spec:
     resources:
       requests:
         storage: "10Gi"
+  initDB:
+    dump:
+      name: aaa
+      path: /docker-entrypoint-initdb.d
+      storage:
+        persistentVolumeClaim: 
+          claimName: backup-volume-claim-1
 
 
   podSpec: 
