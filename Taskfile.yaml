@@ -20,7 +20,7 @@ tasks:
     - helm template grafana-agent -n logging grafana/grafana-agent -f components/grafana-agent/upstream/values.yaml  > components/grafana-agent/upstream/install.yaml
     - helm template grafana grafana/grafana -n logging -f components/grafana/upstream/values.yaml  > components/grafana/upstream/install.yaml
     - helm template prometheus prometheus-community/prometheus -n logging -f components/prometheus/upstream/values.yaml  > components/prometheus/upstream/install.yaml
-    - helm template kube-prometheus-stack prometheus-community/kube-prometheus-stack -n logging -f components/prometheus-stack/upstream/values.yaml  > components/prometheus-stack/upstream/install.yaml
+    - helm template kube-prometheus-stack prometheus-community/kube-prometheus-stack -n logging -f components/prometheus-stack/upstream/values.yaml --include-crds > components/prometheus-stack/upstream/install.yaml
     silent: false
   update-vault:
     cmds:
