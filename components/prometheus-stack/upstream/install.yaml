@@ -44123,7 +44123,7 @@ spec:
               exit 1
             fi
         
-            mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS grafana-loki"
+            mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS `grafana-loki`"
           env:
           - name: MYSQL_HOST
             value: grafana-mysql-innodbcluster
