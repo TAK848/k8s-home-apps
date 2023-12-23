@@ -72,7 +72,7 @@ metadata:
   name: kube-prometheus-stack-k8s-resources-multiclusterxxx
   annotations: {}
   labels:
-    grafana_dashboard: "1"
+    grafana_dashboard: "123"
     app: kube-prometheus-stack-grafanaxxx
 
     # app.kubernetes.io/managed-by: Helm
