@@ -929,8 +929,8 @@ grafana:
   namespaceOverride: ""
 
   ####### self
-  replicas: 2
-  headlessService: true
+  replicas: 1
+  headlessService: false
   resources:
     limits:
       cpu: 200m
@@ -944,50 +944,50 @@ grafana:
     userKey: admin-user
     passwordKey: admin-password
 
-  extraInitContainers:
-  - name: create-mysql-db
-    image: mysql:8
-    imagePullPolicy: IfNotPresent
-    command: # wait until mysql is ready, then create grafana database
-    - /bin/bash
-    - -c
-    - |
-      set -ex
-      count=0
-      max_count=30  # タイムアウトまでの試行回数（例: 30回）
+  # extraInitContainers:
+  # - name: create-mysql-db
+  #   image: mysql:8
+  #   imagePullPolicy: IfNotPresent
+  #   command: # wait until mysql is ready, then create grafana database
+  #   - /bin/bash
+  #   - -c
+  #   - |
+  #     set -ex
+  #     count=0
+  #     max_count=30  # タイムアウトまでの試行回数（例: 30回）
 
-      until mysql -h ${MYSQL_HOST} -uroot -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
-        sleep 1
-        count=$((count+1))
-      done
+  #     until mysql -h ${MYSQL_HOST} -uroot -e "SELECT 1" || [ "$count" -eq "$max_count" ]; do
+  #       sleep 1
+  #       count=$((count+1))
+  #     done
 
-      if [ "$count" -eq "$max_count" ]; then
-        echo "タイムアウト：MySQLサーバーが利用可能になりませんでした。"
-        exit 1
-      fi
+  #     if [ "$count" -eq "$max_count" ]; then
+  #       echo "タイムアウト：MySQLサーバーが利用可能になりませんでした。"
+  #       exit 1
+  #     fi
 
-      mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS grafana_loki"
-    env:
-    - name: MYSQL_HOST
-      value: grafana-mysql-innodbcluster
-    - name: MYSQL_PWD
-      valueFrom:
-        secretKeyRef:
-          name: grafana-mysql-innodbcluster-cluster-secret
-          key: rootPassword
-  env:
-    GF_DATABASE_TYPE: mysql
-    GF_DATABASE_HOST: grafana-mysql-innodbcluster
-    GF_DATABASE_NAME: grafana_loki
-  envValueFrom:
-    GF_DATABASE_USER:
-      secretKeyRef:
-        name: grafana-mysql-innodbcluster-cluster-secret
-        key: rootUser
-    GF_DATABASE_PASSWORD:
-      secretKeyRef:
-        name: grafana-mysql-innodbcluster-cluster-secret
-        key: rootPassword
+  #     mysql -h ${MYSQL_HOST} -uroot -e "CREATE DATABASE IF NOT EXISTS grafana_loki"
+  #   env:
+  #   - name: MYSQL_HOST
+  #     value: grafana-mysql-innodbcluster
+  #   - name: MYSQL_PWD
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: grafana-mysql-innodbcluster-cluster-secret
+  #         key: rootPassword
+  # env:
+  #   GF_DATABASE_TYPE: mysql
+  #   GF_DATABASE_HOST: grafana-mysql-innodbcluster
+  #   GF_DATABASE_NAME: grafana_loki
+  # envValueFrom:
+  #   GF_DATABASE_USER:
+  #     secretKeyRef:
+  #       name: grafana-mysql-innodbcluster-cluster-secret
+  #       key: rootUser
+  #   GF_DATABASE_PASSWORD:
+  #     secretKeyRef:
+  #       name: grafana-mysql-innodbcluster-cluster-secret
+  #       key: rootPassword
   ######## self
 
   ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
@@ -1058,7 +1058,7 @@ grafana:
 
   sidecar:
     dashboards:
-      enabled: true
+      enabled: false
       label: grafana_dashboard
       labelValue: "1"
       # Allow discovery in all namespaces for dashboards
@@ -1075,7 +1075,7 @@ grafana:
       provider:
         allowUiUpdates: false
     datasources:
-      enabled: true
+      enabled: false
       defaultDatasourceEnabled: true
       isDefaultDatasource: true
 
