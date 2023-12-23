@@ -4,7 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -45,7 +45,7 @@ metadata:
   name: grafana
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -144,7 +144,7 @@ metadata:
   name: grafana-dashboards-grafana-dashboards-kubernetes
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -159,7 +159,7 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -176,7 +176,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: grafana-clusterrolebinding
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -197,7 +197,7 @@ metadata:
   name: grafana
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -211,7 +211,7 @@ metadata:
   name: grafana
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -232,7 +232,7 @@ metadata:
   name: grafana-headless
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -254,7 +254,7 @@ metadata:
   name: grafana
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -277,7 +277,7 @@ metadata:
   name: grafana
   namespace: logging
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -298,7 +298,7 @@ spec:
         app.kubernetes.io/instance: grafana
       annotations:
         checksum/config: a1b05d52ac89b35efdf7d07d7b9bb18edebb3b5199f422fdee8545d51d056669
-        checksum/dashboards-json-config: 660232b5fa211c44c14fc119178a63aabf88542973c8faefd499552fbc0dfca6
+        checksum/dashboards-json-config: 36073febb09547e0538c224416c162bfaee994641375bd7d37bae0a0063d3984
         checksum/sc-dashboard-provider-config: f894c6d794865beb8a04c507c1de523c02ba660953ac2d8db5bb8e6c84655759
         kubectl.kubernetes.io/default-container: grafana
     spec:
@@ -559,7 +559,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -580,7 +580,7 @@ metadata:
     "helm.sh/hook": test-success
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
@@ -600,7 +600,7 @@ kind: Pod
 metadata:
   name: grafana-test
   labels:
-    helm.sh/chart: grafana-7.0.17
+    helm.sh/chart: grafana-7.0.19
     app.kubernetes.io/name: grafana
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/version: "10.2.2"
