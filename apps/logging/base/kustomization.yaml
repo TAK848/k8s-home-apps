@@ -7,7 +7,8 @@ resources:
 - ../../../components/grafana-loki
 - ../../../components/grafana-agent
 - ../../../components/grafana
-- ../../../components/prometheus-stack
+# - ../../../components/prometheus-stack
+- ../../../components/prometheus-stack/resources
 # - ../../../components/promtail
 # - ../../../components/prometheus
 # - ../../../components/prometheus-operator

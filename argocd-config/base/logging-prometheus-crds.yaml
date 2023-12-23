@@ -1,22 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: logging
+  name: logging-prometheus-crds
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   project: default
   source:
     repoURL: "git@github.com:TAK848/k8s-home-apps.git"
-    path: apps/logging/base
+    path: apps/logging-prometheus-crds/base
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
-    namespace: logging
+    # namespace: logging
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
       allowEmpty: false
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
+    - Replace=true
+    - ServerSideApply=true
