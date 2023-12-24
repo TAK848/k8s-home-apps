@@ -89,6 +89,16 @@ spec:
             name: kube-prometheus-stack-kube-state-metrics
             port:
               number: 8080
+  - host: loki-gateway.logging.home.tak848.me
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: loki-gateway
+            port:
+              number: 80
   tls:
   - hosts:
     - "*.logging.home.tak848.me"
