@@ -100,6 +100,7 @@ data:
         s3:
           access_key_id: ${MINIO_ACCESS_KEY}
           bucketnames: loki-chunks
+          endpoint: http://minio:9000
           insecure: true
           s3forcepathstyle: true
           secret_access_key: ${MINIO_SECRET_ACCESS_KEY}
@@ -124,6 +125,7 @@ data:
         s3:
           access_key_id: ${MINIO_ACCESS_KEY}
           bucketnames: loki-ruler
+          endpoint: http://minio:9000
           insecure: true
           s3forcepathstyle: true
           secret_access_key: ${MINIO_SECRET_ACCESS_KEY}
@@ -800,7 +802,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
+        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
       labels:
         app.kubernetes.io/part-of: memberlist
         app.kubernetes.io/name: loki
@@ -929,7 +931,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
+        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -1087,7 +1089,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: b840b888ea67742b849feb9e9e0986df1b20a47057aacda77e7f343518973753
+        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
