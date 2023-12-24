@@ -22,6 +22,7 @@ tasks:
     - helm template prometheus prometheus-community/prometheus -n logging -f components/prometheus/upstream/values.yaml  > components/prometheus/upstream/install.yaml
     - helm template kube-prometheus-stack prometheus-community/kube-prometheus-stack -n logging -f components/prometheus-stack/resources/upstream/values.yaml > components/prometheus-stack/resources/upstream/install.yaml
     - helm show crds prometheus-community/kube-prometheus-stack > components/prometheus-stack/crds/upstream/crds.yaml
+    - helm template promtail grafana/promtail -n logging -f components/promtail/upstream/values.yaml  > components/promtail/upstream/install.yaml
     silent: false
   update-vault:
     cmds:

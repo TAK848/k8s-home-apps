@@ -9,7 +9,7 @@ resources:
 - ../../../components/grafana
 # - ../../../components/prometheus-stack
 - ../../../components/prometheus-stack/resources
-# - ../../../components/promtail
+- ../../../components/promtail
 # - ../../../components/prometheus
 # - ../../../components/prometheus-operator
 # - ../../../components/alertmanager

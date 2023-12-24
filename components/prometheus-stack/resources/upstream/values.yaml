@@ -1060,7 +1060,7 @@ grafana:
     dashboards:
       enabled: false
       label: grafana_dashboard
-      labelValue: "10"
+      labelValue: "1"
       # Allow discovery in all namespaces for dashboards
       searchNamespace: ALL
 
@@ -1076,8 +1076,10 @@ grafana:
         allowUiUpdates: false
     datasources:
       enabled: false
-      defaultDatasourceEnabled: true
-      isDefaultDatasource: true
+      # defaultDatasourceEnabled: true
+      # isDefaultDatasource: true
+      defaultDatasourceEnabled: false
+      isDefaultDatasource: false
 
       uid: prometheus
 
@@ -1104,7 +1106,7 @@ grafana:
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/0fee93e12dc7c2ea1218f19ae25ec6b893460590/pkg/prometheus/statefulset.go#L255-L286
       createPrometheusReplicasDatasources: false
       label: grafana_datasource
-      labelValue: "10"
+      labelValue: "1"
 
       ## Field with internal link pointing to existing data source in Grafana.
       ## Can be provisioned via additionalDataSources
