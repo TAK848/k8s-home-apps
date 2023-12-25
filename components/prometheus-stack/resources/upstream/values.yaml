@@ -2804,11 +2804,11 @@ prometheusOperator:
 ##
 prometheus:
 
-  # monitor:
-  #   relabelings:
-  #   - action: replace
-  #     replacement: loki
-  #     targetLabel: cluster
+  monitor:
+    relabelings:
+    - action: replace
+      replacement: loki
+      targetLabel: cluster
 
   enabled: true
 

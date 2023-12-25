@@ -5629,6 +5629,13 @@ spec:
   endpoints:
     - port: http-metrics
       scheme: http
+      relabelings:
+        - action: replace
+          replacement: loki
+          targetLabel: cluster
+        - sourceLabels:
+          - __meta_kubernetes_pod_node_name
+          targetLabel: instance
 ---
 # Source: kube-prometheus-stack/templates/alertmanager/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
