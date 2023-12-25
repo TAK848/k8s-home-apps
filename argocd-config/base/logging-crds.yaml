@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: logging-prometheus-crds
+  name: logging-crds
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: ..
@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: "git@github.com:TAK848/k8s-home-apps.git"
-    path: apps/logging-prometheus-crds/base
+    path: apps/logging-crds/base
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc

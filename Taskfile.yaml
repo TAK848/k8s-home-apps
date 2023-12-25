@@ -17,12 +17,14 @@ tasks:
     cmds:
     - helm template loki grafana/loki -n logging -f components/grafana-loki/upstream/values.yaml  > components/grafana-loki/upstream/install.yaml
     - helm template minio minio/minio -n MINIO_NAMESPACE_PLACEHOLDER -f components/minio/upstream/values.yaml  > components/minio/upstream/install.yaml
-    - helm template grafana-agent -n logging grafana/grafana-agent -f components/grafana-agent/upstream/values.yaml  > components/grafana-agent/upstream/install.yaml
+    - helm template grafana-agent -n logging grafana/grafana-agent -f components/grafana-agent/upstream/values.yaml > components/grafana-agent/upstream/install.yaml
     - helm template grafana grafana/grafana -n logging -f components/grafana/upstream/values.yaml  > components/grafana/upstream/install.yaml
     - helm template prometheus prometheus-community/prometheus -n logging -f components/prometheus/upstream/values.yaml  > components/prometheus/upstream/install.yaml
     - helm template kube-prometheus-stack prometheus-community/kube-prometheus-stack -n logging -f components/prometheus-stack/resources/upstream/values.yaml > components/prometheus-stack/resources/upstream/install.yaml
     - helm show crds prometheus-community/kube-prometheus-stack > components/prometheus-stack/crds/upstream/crds.yaml
     - helm template promtail grafana/promtail -n logging -f components/promtail/upstream/values.yaml  > components/promtail/upstream/install.yaml
+    - helm template grafana-agent-operator grafana/grafana-agent-operator -n logging -f components/grafana-agent-operator/resources/upstream/values.yaml > components/grafana-agent-operator/resources/upstream/install.yaml
+    - helm show crds grafana/grafana-agent-operator > components/grafana-agent-operator/crds/upstream/crds.yaml
     silent: false
   update-vault:
     cmds:

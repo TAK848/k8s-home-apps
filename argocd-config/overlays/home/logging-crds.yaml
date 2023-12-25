@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: logging-prometheus-crds
+  name: logging-crds
   namespace: argocd
 spec:
   source:
-    path: apps/logging-prometheus-crds/overlays/home
+    path: apps/logging-crds/overlays/home

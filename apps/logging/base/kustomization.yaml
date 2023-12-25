@@ -6,6 +6,7 @@ resources:
 - ../../../components/minio
 - ../../../components/grafana-loki
 - ../../../components/grafana-agent
+- ../../../components/grafana-agent-operator/resources
 - ../../../components/grafana
 # - ../../../components/prometheus-stack
 - ../../../components/prometheus-stack/resources

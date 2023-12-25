@@ -11,4 +11,4 @@ patches:
 - path: vault-secrets-operator.yaml
 - path: mysql-operator.yaml
 - path: logging.yaml
-- path: logging-prometheus-crds.yaml
+- path: logging-crds.yaml
