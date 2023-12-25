@@ -85,7 +85,9 @@ defaultRules:
   annotations: {}
 
   ## Additional labels for PrometheusRule alerts
-  additionalRuleLabels: {}
+  # additionalRuleLabels: {}
+  additionalRuleLabels:
+    cluster: loki
 
   ## Additional annotations for PrometheusRule alerts
   additionalRuleAnnotations: {}
@@ -1398,6 +1400,15 @@ kubelet:
     #   targetLabel: nodename
     #   replacement: $1
     #   action: replace
+    - action: replace
+      replacement: loki
+      targetLabel: cluster
+    - targetLabel: metrics_path
+      sourceLabels:
+      - "__metrics_path__"
+    - targetLabel: "instance"
+      sourceLabels:
+      - "node"
 
     ## RelabelConfigs to apply to samples before scraping
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
@@ -2020,13 +2031,20 @@ kube-state-metrics:
       ## RelabelConfigs to apply to samples before scraping
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
       ##
-      relabelings: []
+      # relabelings: []
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
       #   separator: ;
       #   regex: ^(.*)$
       #   targetLabel: nodename
       #   replacement: $1
       #   action: replace
+      relabelings:
+      - action: replace
+        replacement: loki
+        targetLabel: cluster
+      - targetLabel: "instance"
+        sourceLabels:
+        - "__meta_kubernetes_pod_node_name"
 
   selfMonitor:
     enabled: false
@@ -2106,13 +2124,20 @@ prometheus-node-exporter:
       ## RelabelConfigs to apply to samples before scraping
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
       ##
-      relabelings: []
+      # relabelings: []
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
       #   separator: ;
       #   regex: ^(.*)$
       #   targetLabel: nodename
       #   replacement: $1
       #   action: replace
+      relabelings:
+      - action: replace
+        replacement: loki
+        targetLabel: cluster
+      - targetLabel: "instance"
+        sourceLabels:
+        - "__meta_kubernetes_pod_node_name"
   rbac:
     ## If true, create PSPs for node-exporter
     ##
@@ -2778,6 +2803,13 @@ prometheusOperator:
 ## Deploy a Prometheus instance
 ##
 prometheus:
+
+  # monitor:
+  #   relabelings:
+  #   - action: replace
+  #     replacement: loki
+  #     targetLabel: cluster
+
   enabled: true
 
   ## Toggle prometheus into agent mode
