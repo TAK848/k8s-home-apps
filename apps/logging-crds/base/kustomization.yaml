@@ -3,3 +3,10 @@ kind: Kustomization
 resources:
 - ../../../components/prometheus-stack/crds
 - ../../../components/grafana-agent-operator/crds
+patches:
+- target:
+    name: grafanaagents.monitoring.grafana.com
+    kind: CustomResourceDefinition
+    group: apiextensions.k8s.io
+    version: v1
+  path: patch-crd.yaml
