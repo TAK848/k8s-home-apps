@@ -25,6 +25,8 @@ tasks:
     - helm template promtail grafana/promtail -n logging -f components/promtail/upstream/values.yaml  > components/promtail/upstream/install.yaml
     - helm template grafana-agent-operator grafana/grafana-agent-operator -n logging -f components/grafana-agent-operator/resources/upstream/values.yaml > components/grafana-agent-operator/resources/upstream/install.yaml
     - helm show crds grafana/grafana-agent-operator > components/grafana-agent-operator/crds/upstream/crds.yaml
+    - yq eval 'select(.metadata.name | test(".*\.coreos\.com$") | not)' components/grafana-agent-operator/crds/upstream/crds.yaml > components/grafana-agent-operator/crds/upstream/filtered-crds.yaml
+
     silent: false
   update-vault:
     cmds:
