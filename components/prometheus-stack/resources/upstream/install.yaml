@@ -2110,7 +2110,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerMembersInconsistent
       annotations:
         description: Alertmanager {{ $labels.namespace }}/{{ $labels.pod}} has only found {{ $value }} members of the {{$labels.job}} cluster.
@@ -2125,7 +2125,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerFailedToSendAlerts
       annotations:
         description: Alertmanager {{ $labels.namespace }}/{{ $labels.pod}} failed to send {{ $value | humanizePercentage }} of notifications to {{ $labels.integration }}.
@@ -2141,7 +2141,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerClusterFailedToSendAlerts
       annotations:
         description: The minimum notification failure rate to {{ $labels.integration }} sent from any instance in the {{$labels.job}} cluster is {{ $value | humanizePercentage }}.
@@ -2157,7 +2157,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerClusterFailedToSendAlerts
       annotations:
         description: The minimum notification failure rate to {{ $labels.integration }} sent from any instance in the {{$labels.job}} cluster is {{ $value | humanizePercentage }}.
@@ -2173,7 +2173,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerConfigInconsistent
       annotations:
         description: Alertmanager instances within the {{$labels.job}} cluster have different configurations.
@@ -2187,7 +2187,7 @@ spec:
       for: 20m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerClusterDown
       annotations:
         description: '{{ $value | humanizePercentage }} of Alertmanager instances within the {{$labels.job}} cluster have been up for less than half of the last 5m.'
@@ -2207,7 +2207,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: AlertmanagerClusterCrashlooping
       annotations:
         description: '{{ $value | humanizePercentage }} of Alertmanager instances within the {{$labels.job}} cluster have restarted at least 5 times in the last 10m.'
@@ -2227,7 +2227,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/config-reloaders.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2260,7 +2260,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/etcd.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2298,7 +2298,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdInsufficientMembers
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": insufficient members ({{ $value }}).'
@@ -2307,7 +2307,7 @@ spec:
       for: 3m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdNoLeader
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": member {{ $labels.instance }} has no leader.'
@@ -2316,7 +2316,7 @@ spec:
       for: 1m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighNumberOfLeaderChanges
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": {{ $value }} leader changes within the last 15 minutes. Frequent elections may be a sign of insufficient resources, high network latency, or disruptions by other components and should be investigated.'
@@ -2325,7 +2325,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighNumberOfFailedGRPCRequests
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{ $labels.instance }}.'
@@ -2338,7 +2338,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighNumberOfFailedGRPCRequests
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{ $labels.instance }}.'
@@ -2351,7 +2351,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdGRPCRequestsSlow
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": 99th percentile of gRPC requests is {{ $value }}s on etcd instance {{ $labels.instance }} for {{ $labels.grpc_method }} method.'
@@ -2362,7 +2362,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdMemberCommunicationSlow
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": member communication with {{ $labels.To }} is taking {{ $value }}s on etcd instance {{ $labels.instance }}.'
@@ -2373,7 +2373,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighNumberOfFailedProposals
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": {{ $value }} proposal failures within the last 30 minutes on etcd instance {{ $labels.instance }}.'
@@ -2382,7 +2382,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighFsyncDurations
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": 99th percentile fsync durations are {{ $value }}s on etcd instance {{ $labels.instance }}.'
@@ -2393,7 +2393,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighFsyncDurations
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": 99th percentile fsync durations are {{ $value }}s on etcd instance {{ $labels.instance }}.'
@@ -2404,7 +2404,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdHighCommitDurations
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": 99th percentile commit durations {{ $value }}s on etcd instance {{ $labels.instance }}.'
@@ -2415,7 +2415,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdDatabaseQuotaLowSpace
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": database size exceeds the defined quota on etcd instance {{ $labels.instance }}, please defrag or increase the quota as the writes to etcd will be disabled when it is full.'
@@ -2424,7 +2424,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdExcessiveDatabaseGrowth
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": Predicting running out of disk space in the next four hours, based on write observations within the past four hours on etcd instance {{ $labels.instance }}, please check as it might be disruptive.'
@@ -2433,7 +2433,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: etcdDatabaseHighFragmentationRatio
       annotations:
         description: 'etcd cluster "{{ $labels.job }}": database size in use on instance {{ $labels.instance }} is {{ $value | humanizePercentage }} of the actual allocated disk space, please run defragmentation (e.g. etcdctl defrag) to retrieve the unused fragmented disk space.'
@@ -2443,7 +2443,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/general.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2474,7 +2474,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: Watchdog
       annotations:
         description: 'This is an alert meant to ensure that the entire alerting pipeline is functional.
@@ -2493,7 +2493,7 @@ spec:
       expr: vector(1)
       labels:
         severity: none
-        cluster: loki
+        cluster: home-kubeadm
     - alert: InfoInhibitor
       annotations:
         description: 'This is an alert that is used to inhibit info alerts.
@@ -2514,7 +2514,7 @@ spec:
       expr: ALERTS{severity = "info"} == 1 unless on (namespace) ALERTS{alertname != "InfoInhibitor", severity =~ "warning|critical", alertstate="firing"} == 1
       labels:
         severity: none
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_cpu_usage_seconds_total.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2544,7 +2544,7 @@ spec:
         )
       record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_memory_cache.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2573,7 +2573,7 @@ spec:
         )
       record: node_namespace_pod_container:container_memory_cache
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_memory_rss.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2602,7 +2602,7 @@ spec:
         )
       record: node_namespace_pod_container:container_memory_rss
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_memory_swap.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2631,7 +2631,7 @@ spec:
         )
       record: node_namespace_pod_container:container_memory_swap
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_memory_working_set_bytes.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2660,7 +2660,7 @@ spec:
         )
       record: node_namespace_pod_container:container_memory_working_set_bytes
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.container_resource.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2689,7 +2689,7 @@ spec:
         )
       record: cluster:namespace:pod_memory:active:kube_pod_container_resource_requests
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum by (namespace, cluster) (
             sum by (namespace, pod, cluster) (
@@ -2702,7 +2702,7 @@ spec:
         )
       record: namespace_memory:kube_pod_container_resource_requests:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         kube_pod_container_resource_requests{resource="cpu",job="kube-state-metrics"}  * on (namespace, pod, cluster)
         group_left() max by (namespace, pod, cluster) (
@@ -2710,7 +2710,7 @@ spec:
         )
       record: cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum by (namespace, cluster) (
             sum by (namespace, pod, cluster) (
@@ -2723,7 +2723,7 @@ spec:
         )
       record: namespace_cpu:kube_pod_container_resource_requests:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         kube_pod_container_resource_limits{resource="memory",job="kube-state-metrics"}  * on (namespace, pod, cluster)
         group_left() max by (namespace, pod, cluster) (
@@ -2731,7 +2731,7 @@ spec:
         )
       record: cluster:namespace:pod_memory:active:kube_pod_container_resource_limits
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum by (namespace, cluster) (
             sum by (namespace, pod, cluster) (
@@ -2744,7 +2744,7 @@ spec:
         )
       record: namespace_memory:kube_pod_container_resource_limits:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         kube_pod_container_resource_limits{resource="cpu",job="kube-state-metrics"}  * on (namespace, pod, cluster)
         group_left() max by (namespace, pod, cluster) (
@@ -2752,7 +2752,7 @@ spec:
          )
       record: cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum by (namespace, cluster) (
             sum by (namespace, pod, cluster) (
@@ -2765,7 +2765,7 @@ spec:
         )
       record: namespace_cpu:kube_pod_container_resource_limits:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/k8s.rules.pod_owner.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -2803,7 +2803,7 @@ spec:
         )
       labels:
         workload_type: deployment
-        cluster: loki
+        cluster: home-kubeadm
       record: namespace_workload_pod:kube_pod_owner:relabel
     - expr: |-
         max by (cluster, namespace, workload, pod) (
@@ -2814,7 +2814,7 @@ spec:
         )
       labels:
         workload_type: daemonset
-        cluster: loki
+        cluster: home-kubeadm
       record: namespace_workload_pod:kube_pod_owner:relabel
     - expr: |-
         max by (cluster, namespace, workload, pod) (
@@ -2825,7 +2825,7 @@ spec:
         )
       labels:
         workload_type: statefulset
-        cluster: loki
+        cluster: home-kubeadm
       record: namespace_workload_pod:kube_pod_owner:relabel
     - expr: |-
         max by (cluster, namespace, workload, pod) (
@@ -2836,7 +2836,7 @@ spec:
         )
       labels:
         workload_type: job
-        cluster: loki
+        cluster: home-kubeadm
       record: namespace_workload_pod:kube_pod_owner:relabel
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-availability.rules.yaml
@@ -2863,33 +2863,33 @@ spec:
     - expr: avg_over_time(code_verb:apiserver_request_total:increase1h[30d]) * 24 * 30
       record: code_verb:apiserver_request_total:increase30d
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, code) (code_verb:apiserver_request_total:increase30d{verb=~"LIST|GET"})
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: code:apiserver_request_total:increase30d
     - expr: sum by (cluster, code) (code_verb:apiserver_request_total:increase30d{verb=~"POST|PUT|PATCH|DELETE"})
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: code:apiserver_request_total:increase30d
     - expr: sum by (cluster, verb, scope) (increase(apiserver_request_sli_duration_seconds_count{job="apiserver"}[1h]))
       record: cluster_verb_scope:apiserver_request_sli_duration_seconds_count:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, verb, scope) (avg_over_time(cluster_verb_scope:apiserver_request_sli_duration_seconds_count:increase1h[30d]) * 24 * 30)
       record: cluster_verb_scope:apiserver_request_sli_duration_seconds_count:increase30d
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, verb, scope, le) (increase(apiserver_request_sli_duration_seconds_bucket[1h]))
       record: cluster_verb_scope_le:apiserver_request_sli_duration_seconds_bucket:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, verb, scope, le) (avg_over_time(cluster_verb_scope_le:apiserver_request_sli_duration_seconds_bucket:increase1h[30d]) * 24 * 30)
       record: cluster_verb_scope_le:apiserver_request_sli_duration_seconds_bucket:increase30d
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         1 - (
           (
@@ -2921,7 +2921,7 @@ spec:
         sum by (cluster) (code:apiserver_request_total:increase30d)
       labels:
         verb: all
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:availability30d
     - expr: |-
         1 - (
@@ -2947,7 +2947,7 @@ spec:
         sum by (cluster) (code:apiserver_request_total:increase30d{verb="read"})
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:availability30d
     - expr: |-
         1 - (
@@ -2965,34 +2965,34 @@ spec:
         sum by (cluster) (code:apiserver_request_total:increase30d{verb="write"})
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:availability30d
     - expr: sum by (cluster,code,resource) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[5m]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: code_resource:apiserver_request_total:rate5m
     - expr: sum by (cluster,code,resource) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[5m]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: code_resource:apiserver_request_total:rate5m
     - expr: sum by (cluster, code, verb) (increase(apiserver_request_total{job="apiserver",verb=~"LIST|GET|POST|PUT|PATCH|DELETE",code=~"2.."}[1h]))
       record: code_verb:apiserver_request_total:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, code, verb) (increase(apiserver_request_total{job="apiserver",verb=~"LIST|GET|POST|PUT|PATCH|DELETE",code=~"3.."}[1h]))
       record: code_verb:apiserver_request_total:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, code, verb) (increase(apiserver_request_total{job="apiserver",verb=~"LIST|GET|POST|PUT|PATCH|DELETE",code=~"4.."}[1h]))
       record: code_verb:apiserver_request_total:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum by (cluster, code, verb) (increase(apiserver_request_total{job="apiserver",verb=~"LIST|GET|POST|PUT|PATCH|DELETE",code=~"5.."}[1h]))
       record: code_verb:apiserver_request_total:increase1h
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-burnrate.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3040,7 +3040,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[1d]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate1d
     - expr: |-
         (
@@ -3068,7 +3068,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[1h]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate1h
     - expr: |-
         (
@@ -3096,7 +3096,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[2h]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate2h
     - expr: |-
         (
@@ -3124,7 +3124,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[30m]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate30m
     - expr: |-
         (
@@ -3152,7 +3152,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[3d]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate3d
     - expr: |-
         (
@@ -3180,7 +3180,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[5m]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate5m
     - expr: |-
         (
@@ -3208,7 +3208,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"LIST|GET"}[6h]))
       labels:
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate6h
     - expr: |-
         (
@@ -3225,7 +3225,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[1d]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate1d
     - expr: |-
         (
@@ -3242,7 +3242,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[1h]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate1h
     - expr: |-
         (
@@ -3259,7 +3259,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[2h]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate2h
     - expr: |-
         (
@@ -3276,7 +3276,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[30m]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate30m
     - expr: |-
         (
@@ -3293,7 +3293,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[3d]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate3d
     - expr: |-
         (
@@ -3310,7 +3310,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[5m]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate5m
     - expr: |-
         (
@@ -3327,7 +3327,7 @@ spec:
         sum by (cluster) (rate(apiserver_request_total{job="apiserver",verb=~"POST|PUT|PATCH|DELETE"}[6h]))
       labels:
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: apiserver_request:burnrate6h
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-histogram.rules.yaml
@@ -3354,13 +3354,13 @@ spec:
       labels:
         quantile: '0.99'
         verb: read
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.99, sum by (cluster, le, resource) (rate(apiserver_request_sli_duration_seconds_bucket{job="apiserver",verb=~"POST|PUT|PATCH|DELETE",subresource!~"proxy|attach|log|exec|portforward"}[5m]))) > 0
       labels:
         quantile: '0.99'
         verb: write
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:apiserver_request_sli_duration_seconds:histogram_quantile
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-apiserver-slos.yaml
@@ -3397,7 +3397,7 @@ spec:
         long: 1h
         severity: critical
         short: 5m
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAPIErrorBudgetBurn
       annotations:
         description: The API server is burning too much error budget.
@@ -3412,7 +3412,7 @@ spec:
         long: 6h
         severity: critical
         short: 30m
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAPIErrorBudgetBurn
       annotations:
         description: The API server is burning too much error budget.
@@ -3427,7 +3427,7 @@ spec:
         long: 1d
         severity: warning
         short: 2h
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAPIErrorBudgetBurn
       annotations:
         description: The API server is burning too much error budget.
@@ -3442,7 +3442,7 @@ spec:
         long: 3d
         severity: warning
         short: 6h
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-prometheus-general.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3467,11 +3467,11 @@ spec:
     - expr: count without(instance, pod, node) (up == 1)
       record: count:up1
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: count without(instance, pod, node) (up == 0)
       record: count:up0
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-prometheus-node-recording.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3496,27 +3496,27 @@ spec:
     - expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[3m])) BY (instance)
       record: instance:node_cpu:rate:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum(rate(node_network_receive_bytes_total[3m])) BY (instance)
       record: instance:node_network_receive_bytes:rate:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum(rate(node_network_transmit_bytes_total[3m])) BY (instance)
       record: instance:node_network_transmit_bytes:rate:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[5m])) WITHOUT (cpu, mode) / ON(instance) GROUP_LEFT() count(sum(node_cpu_seconds_total) BY (instance, cpu)) BY (instance)
       record: instance:node_cpu:ratio
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[5m]))
       record: cluster:node_cpu:sum_rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: cluster:node_cpu:sum_rate5m / count(sum(node_cpu_seconds_total) BY (instance, cpu))
       record: cluster:node_cpu:ratio
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-scheduler.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3541,47 +3541,47 @@ spec:
     - expr: histogram_quantile(0.99, sum(rate(scheduler_e2e_scheduling_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.99'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_e2e_scheduling_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.99, sum(rate(scheduler_scheduling_algorithm_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.99'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_scheduling_algorithm_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.99, sum(rate(scheduler_binding_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.99'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_binding_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.9, sum(rate(scheduler_e2e_scheduling_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.9'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_e2e_scheduling_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.9, sum(rate(scheduler_scheduling_algorithm_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.9'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_scheduling_algorithm_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.9, sum(rate(scheduler_binding_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.9'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_binding_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.5, sum(rate(scheduler_e2e_scheduling_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.5'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_e2e_scheduling_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.5, sum(rate(scheduler_scheduling_algorithm_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.5'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_scheduling_algorithm_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.5, sum(rate(scheduler_binding_duration_seconds_bucket{job="kube-scheduler"}[5m])) without(instance, pod))
       labels:
         quantile: '0.5'
-        cluster: loki
+        cluster: home-kubeadm
       record: cluster_quantile:scheduler_binding_duration_seconds:histogram_quantile
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kube-state-metrics.yaml
@@ -3617,7 +3617,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStateMetricsWatchErrors
       annotations:
         description: kube-state-metrics is experiencing errors at an elevated rate in watch operations. This is likely causing it to not be able to expose metrics about Kubernetes objects correctly or at all.
@@ -3631,7 +3631,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStateMetricsShardingMismatch
       annotations:
         description: kube-state-metrics pods are running with different --total-shards configuration, some Kubernetes objects may be exposed multiple times or not exposed at all.
@@ -3641,7 +3641,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStateMetricsShardsMissing
       annotations:
         description: kube-state-metrics shards are missing, some Kubernetes objects are not being exposed.
@@ -3655,7 +3655,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubelet.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3680,17 +3680,17 @@ spec:
     - expr: histogram_quantile(0.99, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (cluster, instance, le) * on (cluster, instance) group_left(node) kubelet_node_name{job="kubelet", metrics_path="/metrics"})
       labels:
         quantile: '0.99'
-        cluster: loki
+        cluster: home-kubeadm
       record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.9, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (cluster, instance, le) * on (cluster, instance) group_left(node) kubelet_node_name{job="kubelet", metrics_path="/metrics"})
       labels:
         quantile: '0.9'
-        cluster: loki
+        cluster: home-kubeadm
       record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
     - expr: histogram_quantile(0.5, sum(rate(kubelet_pleg_relist_duration_seconds_bucket{job="kubelet", metrics_path="/metrics"}[5m])) by (cluster, instance, le) * on (cluster, instance) group_left(node) kubelet_node_name{job="kubelet", metrics_path="/metrics"})
       labels:
         quantile: '0.5'
-        cluster: loki
+        cluster: home-kubeadm
       record: node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-apps.yaml
@@ -3722,7 +3722,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubePodNotReady
       annotations:
         description: Pod {{ $labels.namespace }}/{{ $labels.pod }} has been in a non-ready state for longer than 15 minutes.
@@ -3739,7 +3739,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDeploymentGenerationMismatch
       annotations:
         description: Deployment generation for {{ $labels.namespace }}/{{ $labels.deployment }} does not match, this indicates that the Deployment has failed but has not been rolled back.
@@ -3752,7 +3752,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDeploymentReplicasMismatch
       annotations:
         description: Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has not matched the expected number of replicas for longer than 15 minutes.
@@ -3771,7 +3771,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDeploymentRolloutStuck
       annotations:
         description: Rollout of deployment {{ $labels.namespace }}/{{ $labels.deployment }} is not progressing for longer than 15 minutes.
@@ -3783,7 +3783,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStatefulSetReplicasMismatch
       annotations:
         description: StatefulSet {{ $labels.namespace }}/{{ $labels.statefulset }} has not matched the expected number of replicas for longer than 15 minutes.
@@ -3802,7 +3802,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStatefulSetGenerationMismatch
       annotations:
         description: StatefulSet generation for {{ $labels.namespace }}/{{ $labels.statefulset }} does not match, this indicates that the StatefulSet has failed but has not been rolled back.
@@ -3815,7 +3815,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeStatefulSetUpdateNotRolledOut
       annotations:
         description: StatefulSet {{ $labels.namespace }}/{{ $labels.statefulset }} update has not been rolled out.
@@ -3842,7 +3842,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDaemonSetRolloutStuck
       annotations:
         description: DaemonSet {{ $labels.namespace }}/{{ $labels.daemonset }} has not finished or progressed for at least 15 minutes.
@@ -3875,7 +3875,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeContainerWaiting
       annotations:
         description: pod/{{ $labels.pod }} in namespace {{ $labels.namespace }} on container {{ $labels.container}} has been in waiting state for longer than 1 hour.
@@ -3885,7 +3885,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDaemonSetNotScheduled
       annotations:
         description: '{{ $value }} Pods of DaemonSet {{ $labels.namespace }}/{{ $labels.daemonset }} are not scheduled.'
@@ -3898,7 +3898,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeDaemonSetMisScheduled
       annotations:
         description: '{{ $value }} Pods of DaemonSet {{ $labels.namespace }}/{{ $labels.daemonset }} are running where they are not supposed to run.'
@@ -3908,7 +3908,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeJobNotCompleted
       annotations:
         description: Job {{ $labels.namespace }}/{{ $labels.job_name }} is taking more than {{ "43200" | humanizeDuration }} to complete.
@@ -3920,7 +3920,7 @@ spec:
         kube_job_status_active{job="kube-state-metrics", namespace=~".*"} > 0) > 43200
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeJobFailed
       annotations:
         description: Job {{ $labels.namespace }}/{{ $labels.job_name }} failed to complete. Removing failed job after investigation should clear this alert.
@@ -3930,7 +3930,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeHpaReplicasMismatch
       annotations:
         description: HPA {{ $labels.namespace }}/{{ $labels.horizontalpodautoscaler  }} has not matched the desired number of replicas for longer than 15 minutes.
@@ -3953,7 +3953,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeHpaMaxedOut
       annotations:
         description: HPA {{ $labels.namespace }}/{{ $labels.horizontalpodautoscaler  }} has been running at max replicas for longer than 15 minutes.
@@ -3966,7 +3966,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-resources.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4000,7 +4000,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeMemoryOvercommit
       annotations:
         description: Cluster {{ $labels.cluster }} has overcommitted memory resource requests for Pods by {{ $value | humanize }} bytes and cannot tolerate node failure.
@@ -4013,7 +4013,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeCPUQuotaOvercommit
       annotations:
         description: Cluster {{ $labels.cluster }}  has overcommitted CPU resource requests for Namespaces.
@@ -4027,7 +4027,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeMemoryQuotaOvercommit
       annotations:
         description: Cluster {{ $labels.cluster }}  has overcommitted memory resource requests for Namespaces.
@@ -4041,7 +4041,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeQuotaAlmostFull
       annotations:
         description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota.
@@ -4055,7 +4055,7 @@ spec:
       for: 15m
       labels:
         severity: info
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeQuotaFullyUsed
       annotations:
         description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota.
@@ -4069,7 +4069,7 @@ spec:
       for: 15m
       labels:
         severity: info
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeQuotaExceeded
       annotations:
         description: Namespace {{ $labels.namespace }} is using {{ $value | humanizePercentage }} of its {{ $labels.resource }} quota.
@@ -4083,7 +4083,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: CPUThrottlingHigh
       annotations:
         description: '{{ $value | humanizePercentage }} throttling of CPU in namespace {{ $labels.namespace }} for container {{ $labels.container }} in pod {{ $labels.pod }}.'
@@ -4097,7 +4097,7 @@ spec:
       for: 15m
       labels:
         severity: info
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-storage.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4139,7 +4139,7 @@ spec:
       for: 1m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubePersistentVolumeFillingUp
       annotations:
         description: Based on recent sampling, the PersistentVolume claimed by {{ $labels.persistentvolumeclaim }} in Namespace {{ $labels.namespace }} is expected to fill up within four days. Currently {{ $value | humanizePercentage }} is available.
@@ -4162,7 +4162,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubePersistentVolumeInodesFillingUp
       annotations:
         description: The PersistentVolume claimed by {{ $labels.persistentvolumeclaim }} in Namespace {{ $labels.namespace }} only has {{ $value | humanizePercentage }} free inodes.
@@ -4183,7 +4183,7 @@ spec:
       for: 1m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubePersistentVolumeInodesFillingUp
       annotations:
         description: Based on recent sampling, the PersistentVolume claimed by {{ $labels.persistentvolumeclaim }} in Namespace {{ $labels.namespace }} is expected to run out of inodes within four days. Currently {{ $value | humanizePercentage }} of its inodes are free.
@@ -4206,7 +4206,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubePersistentVolumeErrors
       annotations:
         description: The persistent volume {{ $labels.persistentvolume }} has status {{ $labels.phase }}.
@@ -4216,7 +4216,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-apiserver.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4247,7 +4247,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeClientCertificateExpiration
       annotations:
         description: A client certificate used to authenticate to kubernetes apiserver is expiring in less than 24.0 hours.
@@ -4257,7 +4257,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAggregatedAPIErrors
       annotations:
         description: Kubernetes aggregated API {{ $labels.name }}/{{ $labels.namespace }} has reported errors. It has appeared unavailable {{ $value | humanize }} times averaged over the past 10m.
@@ -4266,7 +4266,7 @@ spec:
       expr: sum by (name, namespace, cluster)(increase(aggregator_unavailable_apiservice_total{job="apiserver"}[10m])) > 4
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAggregatedAPIDown
       annotations:
         description: Kubernetes aggregated API {{ $labels.name }}/{{ $labels.namespace }} has been only {{ $value | humanize }}% available over the last 10m.
@@ -4276,7 +4276,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAPIDown
       annotations:
         description: KubeAPI has disappeared from Prometheus target discovery.
@@ -4286,7 +4286,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeAPITerminatedRequests
       annotations:
         description: The kubernetes apiserver has terminated {{ $value | humanizePercentage }} of its incoming requests.
@@ -4296,7 +4296,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-controller-manager.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4327,7 +4327,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-kube-proxy.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4358,7 +4358,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-kubelet.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4389,7 +4389,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeNodeUnreachable
       annotations:
         description: '{{ $labels.node }} is unreachable and some workloads may be rescheduled.'
@@ -4399,7 +4399,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletTooManyPods
       annotations:
         description: Kubelet '{{ $labels.node }}' is running at {{ $value | humanizePercentage }} of its Pod capacity.
@@ -4416,7 +4416,7 @@ spec:
       for: 15m
       labels:
         severity: info
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeNodeReadinessFlapping
       annotations:
         description: The readiness status of node {{ $labels.node }} has changed {{ $value }} times in the last 15 minutes.
@@ -4426,7 +4426,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletPlegDurationHigh
       annotations:
         description: The Kubelet Pod Lifecycle Event Generator has a 99th percentile duration of {{ $value }} seconds on node {{ $labels.node }}.
@@ -4436,7 +4436,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletPodStartUpLatencyHigh
       annotations:
         description: Kubelet Pod startup 99th percentile latency is {{ $value }} seconds on node {{ $labels.node }}.
@@ -4446,7 +4446,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletClientCertificateExpiration
       annotations:
         description: Client certificate for Kubelet on node {{ $labels.node }} expires in {{ $value | humanizeDuration }}.
@@ -4455,7 +4455,7 @@ spec:
       expr: kubelet_certificate_manager_client_ttl_seconds < 604800
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletClientCertificateExpiration
       annotations:
         description: Client certificate for Kubelet on node {{ $labels.node }} expires in {{ $value | humanizeDuration }}.
@@ -4464,7 +4464,7 @@ spec:
       expr: kubelet_certificate_manager_client_ttl_seconds < 86400
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletServerCertificateExpiration
       annotations:
         description: Server certificate for Kubelet on node {{ $labels.node }} expires in {{ $value | humanizeDuration }}.
@@ -4473,7 +4473,7 @@ spec:
       expr: kubelet_certificate_manager_server_ttl_seconds < 604800
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletServerCertificateExpiration
       annotations:
         description: Server certificate for Kubelet on node {{ $labels.node }} expires in {{ $value | humanizeDuration }}.
@@ -4482,7 +4482,7 @@ spec:
       expr: kubelet_certificate_manager_server_ttl_seconds < 86400
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletClientCertificateRenewalErrors
       annotations:
         description: Kubelet on node {{ $labels.node }} has failed to renew its client certificate ({{ $value | humanize }} errors in the last 5 minutes).
@@ -4492,7 +4492,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletServerCertificateRenewalErrors
       annotations:
         description: Kubelet on node {{ $labels.node }} has failed to renew its server certificate ({{ $value | humanize }} errors in the last 5 minutes).
@@ -4502,7 +4502,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeletDown
       annotations:
         description: Kubelet has disappeared from Prometheus target discovery.
@@ -4512,7 +4512,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system-scheduler.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4543,7 +4543,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/kubernetes-system.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4574,7 +4574,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: KubeClientErrors
       annotations:
         description: Kubernetes API server client '{{ $labels.job }}/{{ $labels.instance }}' is experiencing {{ $value | humanizePercentage }} errors.'
@@ -4588,7 +4588,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-exporter.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4616,14 +4616,14 @@ spec:
         )
       record: instance:node_num_cpu:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         1 - avg without (cpu) (
           sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal"}[5m]))
         )
       record: instance:node_cpu_utilisation:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         (
           node_load1{job="node-exporter"}
@@ -4632,7 +4632,7 @@ spec:
         )
       record: instance:node_load1_per_cpu:ratio
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         1 - (
           (
@@ -4653,47 +4653,47 @@ spec:
         )
       record: instance:node_memory_utilisation:ratio
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: rate(node_vmstat_pgmajfault{job="node-exporter"}[5m])
       record: instance:node_vmstat_pgmajfault:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: rate(node_disk_io_time_seconds_total{job="node-exporter", device=~"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)"}[5m])
       record: instance_device:node_disk_io_time_seconds:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: rate(node_disk_io_time_weighted_seconds_total{job="node-exporter", device=~"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)"}[5m])
       record: instance_device:node_disk_io_time_weighted_seconds:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum without (device) (
           rate(node_network_receive_bytes_total{job="node-exporter", device!="lo"}[5m])
         )
       record: instance:node_network_receive_bytes_excluding_lo:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum without (device) (
           rate(node_network_transmit_bytes_total{job="node-exporter", device!="lo"}[5m])
         )
       record: instance:node_network_transmit_bytes_excluding_lo:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum without (device) (
           rate(node_network_receive_drop_total{job="node-exporter", device!="lo"}[5m])
         )
       record: instance:node_network_receive_drop_excluding_lo:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum without (device) (
           rate(node_network_transmit_drop_total{job="node-exporter", device!="lo"}[5m])
         )
       record: instance:node_network_transmit_drop_excluding_lo:rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-exporter.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -4731,7 +4731,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemSpaceFillingUp
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left and is filling up fast.
@@ -4748,7 +4748,7 @@ spec:
       for: 1h
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemAlmostOutOfSpace
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
@@ -4763,7 +4763,7 @@ spec:
       for: 30m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemAlmostOutOfSpace
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available space left.
@@ -4778,7 +4778,7 @@ spec:
       for: 30m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemFilesFillingUp
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up.
@@ -4795,7 +4795,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemFilesFillingUp
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left and is filling up fast.
@@ -4812,7 +4812,7 @@ spec:
       for: 1h
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemAlmostOutOfFiles
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
@@ -4827,7 +4827,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFilesystemAlmostOutOfFiles
       annotations:
         description: Filesystem on {{ $labels.device }}, mounted on {{ $labels.mountpoint }}, at {{ $labels.instance }} has only {{ printf "%.2f" $value }}% available inodes left.
@@ -4842,7 +4842,7 @@ spec:
       for: 1h
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeNetworkReceiveErrs
       annotations:
         description: '{{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf "%.0f" $value }} receive errors in the last two minutes.'
@@ -4852,7 +4852,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeNetworkTransmitErrs
       annotations:
         description: '{{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf "%.0f" $value }} transmit errors in the last two minutes.'
@@ -4862,7 +4862,7 @@ spec:
       for: 1h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeHighNumberConntrackEntriesUsed
       annotations:
         description: '{{ $value | humanizePercentage }} of conntrack entries are used.'
@@ -4871,7 +4871,7 @@ spec:
       expr: (node_nf_conntrack_entries{job="node-exporter"} / node_nf_conntrack_entries_limit) > 0.75
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeTextFileCollectorScrapeError
       annotations:
         description: Node Exporter text file collector on {{ $labels.instance }} failed to scrape.
@@ -4880,7 +4880,7 @@ spec:
       expr: node_textfile_scrape_error{job="node-exporter"} == 1
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeClockSkewDetected
       annotations:
         description: Clock at {{ $labels.instance }} is out of sync by more than 0.05s. Ensure NTP is configured correctly on this host.
@@ -4901,7 +4901,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeClockNotSynchronising
       annotations:
         description: Clock at {{ $labels.instance }} is not synchronising. Ensure NTP is configured on this host.
@@ -4914,7 +4914,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeRAIDDegraded
       annotations:
         description: RAID array '{{ $labels.device }}' at {{ $labels.instance }} is in degraded state due to one or more disks failures. Number of spare drives is insufficient to fix issue automatically.
@@ -4924,7 +4924,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeRAIDDiskFailure
       annotations:
         description: At least one device in RAID array at {{ $labels.instance }} failed. Array '{{ $labels.device }}' needs attention and possibly a disk swap.
@@ -4933,7 +4933,7 @@ spec:
       expr: node_md_disks{state="failed",job="node-exporter",device=~"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)"} > 0
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFileDescriptorLimit
       annotations:
         description: File descriptors limit at {{ $labels.instance }} is currently at {{ printf "%.2f" $value }}%.
@@ -4946,7 +4946,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeFileDescriptorLimit
       annotations:
         description: File descriptors limit at {{ $labels.instance }} is currently at {{ printf "%.2f" $value }}%.
@@ -4959,7 +4959,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeCPUHighUsage
       annotations:
         description: 'CPU usage at {{ $labels.instance }} has been above 90% for the last 15 minutes, is currently at {{ printf "%.2f" $value }}%.
@@ -4971,7 +4971,7 @@ spec:
       for: 15m
       labels:
         severity: info
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeSystemSaturation
       annotations:
         description: 'System load per core at {{ $labels.instance }} has been above 2 for the last 15 minutes, is currently at {{ printf "%.2f" $value }}.
@@ -4987,7 +4987,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeMemoryMajorPagesFaults
       annotations:
         description: 'Memory major pages are occurring at very high rate at {{ $labels.instance }}, 500 major page faults per second for the last 15 minutes, is currently at {{ printf "%.2f" $value }}.
@@ -5001,7 +5001,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeMemoryHighUtilization
       annotations:
         description: 'Memory is filling up at {{ $labels.instance }}, has been above 90% for the last 15 minutes, is currently at {{ printf "%.2f" $value }}%.
@@ -5013,7 +5013,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeDiskIOSaturation
       annotations:
         description: 'Disk IO queue (aqu-sq) is high on {{ $labels.device }} at {{ $labels.instance }}, has been above 10 for the last 15 minutes, is currently at {{ printf "%.2f" $value }}.
@@ -5027,7 +5027,7 @@ spec:
       for: 30m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeSystemdServiceFailed
       annotations:
         description: Systemd service {{ $labels.name }} has entered failed state at {{ $labels.instance }}
@@ -5037,7 +5037,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: NodeBondingDegraded
       annotations:
         description: Bonding interface {{ $labels.master }} on {{ $labels.instance }} is in degraded state due to one or more slave failures.
@@ -5047,7 +5047,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node-network.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -5078,7 +5078,7 @@ spec:
       for: 2m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/node.rules.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -5107,7 +5107,7 @@ spec:
         ))
       record: 'node_namespace_pod:kube_pod_info:'
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         count by (cluster, node) (
           node_cpu_seconds_total{mode="idle",job="node-exporter"}
@@ -5116,7 +5116,7 @@ spec:
         )
       record: node:node_num_cpu:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         sum(
           node_memory_MemAvailable_bytes{job="node-exporter"} or
@@ -5129,7 +5129,7 @@ spec:
         ) by (cluster)
       record: :node_memory_MemAvailable_bytes:sum
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         avg by (cluster, node) (
           sum without (mode) (
@@ -5138,14 +5138,14 @@ spec:
         )
       record: node:node_cpu_utilization:ratio_rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
     - expr: |-
         avg by (cluster) (
           node:node_cpu_utilization:ratio_rate5m
         )
       record: cluster:node_cpu:ratio_rate5m
       labels:
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/prometheus-operator.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -5176,7 +5176,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorWatchErrors
       annotations:
         description: Errors while performing watch operations in controller {{$labels.controller}} in {{$labels.namespace}} namespace.
@@ -5186,7 +5186,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorSyncFailed
       annotations:
         description: Controller {{ $labels.controller }} in {{ $labels.namespace }} namespace fails to reconcile {{ $value }} objects.
@@ -5196,7 +5196,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorReconcileErrors
       annotations:
         description: '{{ $value | humanizePercentage }} of reconciling operations failed for {{ $labels.controller }} controller in {{ $labels.namespace }} namespace.'
@@ -5206,7 +5206,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorNodeLookupErrors
       annotations:
         description: Errors while reconciling Prometheus in {{ $labels.namespace }} Namespace.
@@ -5216,7 +5216,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorNotReady
       annotations:
         description: Prometheus operator in {{ $labels.namespace }} namespace isn't ready to reconcile {{ $labels.controller }} resources.
@@ -5226,7 +5226,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOperatorRejectedResources
       annotations:
         description: Prometheus operator in {{ $labels.namespace }} namespace rejected {{ printf "%0.0f" $value }} {{ $labels.controller }}/{{ $labels.resource }} resources.
@@ -5236,7 +5236,7 @@ spec:
       for: 5m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/templates/prometheus/rules-1.14/prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -5270,7 +5270,7 @@ spec:
       for: 10m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusSDRefreshFailure
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has failed to refresh SD with mechanism {{$labels.mechanism}}.
@@ -5280,7 +5280,7 @@ spec:
       for: 20m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusNotificationQueueRunningFull
       annotations:
         description: Alert notification queue of Prometheus {{$labels.namespace}}/{{$labels.pod}} is running full.
@@ -5297,7 +5297,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusErrorSendingAlertsToSomeAlertmanagers
       annotations:
         description: '{{ printf "%.1f" $value }}% errors while sending alerts from Prometheus {{$labels.namespace}}/{{$labels.pod}} to Alertmanager {{$labels.alertmanager}}.'
@@ -5314,7 +5314,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusNotConnectedToAlertmanagers
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is not connected to any Alertmanagers.
@@ -5327,7 +5327,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusTSDBReloadsFailing
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has detected {{$value | humanize}} reload failures over the last 3h.
@@ -5337,7 +5337,7 @@ spec:
       for: 4h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusTSDBCompactionsFailing
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has detected {{$value | humanize}} compaction failures over the last 3h.
@@ -5347,7 +5347,7 @@ spec:
       for: 4h
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusNotIngestingSamples
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is not ingesting samples.
@@ -5366,7 +5366,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusDuplicateTimestamps
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is dropping {{ printf "%.4g" $value  }} samples/s with different values but duplicated timestamp.
@@ -5376,7 +5376,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusOutOfOrderTimestamps
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} is dropping {{ printf "%.4g" $value  }} samples/s with timestamps arriving out of order.
@@ -5386,7 +5386,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusRemoteStorageFailures
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} failed to send {{ printf "%.1f" $value }}% of the samples to {{ $labels.remote_name}}:{{ $labels.url }}
@@ -5407,7 +5407,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusRemoteWriteBehind
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} remote write is {{ printf "%.1f" $value }}s behind for {{ $labels.remote_name}}:{{ $labels.url }}.
@@ -5425,7 +5425,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusRemoteWriteDesiredShards
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} remote write desired shards calculation wants to run {{ $value }} shards for queue {{ $labels.remote_name}}:{{ $labels.url }}, which is more than the max of {{ printf `prometheus_remote_storage_shards_max{instance="%s",job="kube-prometheus-stack-prometheus",namespace="logging"}` $labels.instance | query | first | value }}.
@@ -5442,7 +5442,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusRuleFailures
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has failed to evaluate {{ printf "%.0f" $value }} rules in the last 5m.
@@ -5452,7 +5452,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusMissingRuleEvaluations
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has missed {{ printf "%.0f" $value }} rule group evaluations in the last 5m.
@@ -5462,7 +5462,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusTargetLimitHit
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has dropped {{ printf "%.0f" $value }} targets because the number of targets exceeded the configured target_limit.
@@ -5472,7 +5472,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusLabelLimitHit
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has dropped {{ printf "%.0f" $value }} targets because some samples exceeded the configured label_limit, label_name_length_limit or label_value_length_limit.
@@ -5482,7 +5482,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusScrapeBodySizeLimitHit
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has failed {{ printf "%.0f" $value }} scrapes in the last 5m because some targets exceeded the configured body_size_limit.
@@ -5492,7 +5492,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusScrapeSampleLimitHit
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} has failed {{ printf "%.0f" $value }} scrapes in the last 5m because some targets exceeded the configured sample_limit.
@@ -5502,7 +5502,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusTargetSyncFailure
       annotations:
         description: '{{ printf "%.0f" $value }} targets in Prometheus {{$labels.namespace}}/{{$labels.pod}} have failed to sync because invalid configuration was supplied.'
@@ -5512,7 +5512,7 @@ spec:
       for: 5m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusHighQueryLoad
       annotations:
         description: Prometheus {{$labels.namespace}}/{{$labels.pod}} query API has less than 20% available capacity in its query engine for the last 15 minutes.
@@ -5522,7 +5522,7 @@ spec:
       for: 15m
       labels:
         severity: warning
-        cluster: loki
+        cluster: home-kubeadm
     - alert: PrometheusErrorSendingAlertsToAnyAlertmanager
       annotations:
         description: '{{ printf "%.1f" $value }}% minimum errors while sending alerts from Prometheus {{$labels.namespace}}/{{$labels.pod}} to any Alertmanager.'
@@ -5539,7 +5539,7 @@ spec:
       for: 15m
       labels:
         severity: critical
-        cluster: loki
+        cluster: home-kubeadm
 ---
 # Source: kube-prometheus-stack/charts/grafana/templates/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -5595,7 +5595,7 @@ spec:
       honorLabels: true
       relabelings:
         - action: replace
-          replacement: loki
+          replacement: home-kubeadm
           targetLabel: cluster
         - sourceLabels:
           - __meta_kubernetes_pod_node_name
@@ -5631,7 +5631,7 @@ spec:
       scheme: http
       relabelings:
         - action: replace
-          replacement: loki
+          replacement: home-kubeadm
           targetLabel: cluster
         - sourceLabels:
           - __meta_kubernetes_pod_node_name
@@ -5944,7 +5944,7 @@ spec:
       - __metrics_path__
       targetLabel: metrics_path
     - action: replace
-      replacement: loki
+      replacement: home-kubeadm
       targetLabel: cluster
     - sourceLabels:
       - __metrics_path__

@@ -87,7 +87,7 @@ defaultRules:
   ## Additional labels for PrometheusRule alerts
   # additionalRuleLabels: {}
   additionalRuleLabels:
-    cluster: loki
+    cluster: home-kubeadm
 
   ## Additional annotations for PrometheusRule alerts
   additionalRuleAnnotations: {}
@@ -1401,7 +1401,7 @@ kubelet:
     #   replacement: $1
     #   action: replace
     - action: replace
-      replacement: loki
+      replacement: home-kubeadm
       targetLabel: cluster
     - targetLabel: metrics_path
       sourceLabels:
@@ -2040,7 +2040,7 @@ kube-state-metrics:
       #   action: replace
       relabelings:
       - action: replace
-        replacement: loki
+        replacement: home-kubeadm
         targetLabel: cluster
       - targetLabel: "instance"
         sourceLabels:
@@ -2133,7 +2133,7 @@ prometheus-node-exporter:
       #   action: replace
       relabelings:
       - action: replace
-        replacement: loki
+        replacement: home-kubeadm
         targetLabel: cluster
       - targetLabel: "instance"
         sourceLabels:
@@ -2807,7 +2807,7 @@ prometheus:
   monitor:
     relabelings:
     - action: replace
-      replacement: loki
+      replacement: home-kubeadm
       targetLabel: cluster
 
   enabled: true
