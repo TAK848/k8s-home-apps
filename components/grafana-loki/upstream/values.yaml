@@ -211,10 +211,8 @@ loki:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
 
-    {{- with .Values.loki.analytics }}
     analytics:
-      {{- tpl (. | toYaml) $ | nindent 4 }}
-    {{- end }}
+      reporting_enabled: false
 
     {{- with .Values.loki.querier }}
     querier:

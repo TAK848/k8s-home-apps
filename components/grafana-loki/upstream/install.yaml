@@ -98,6 +98,8 @@ metadata:
 data:
   config.yaml: |
     
+    analytics:
+      reporting_enabled: false
     auth_enabled: false
     common:
       compactor_address: 'loki-backend'
@@ -857,7 +859,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
+        checksum/config: afbccb84267935561ac7b670188d3889c7c2d9648146e1d3807782ff903dc8e3
       labels:
         app.kubernetes.io/part-of: memberlist
         app.kubernetes.io/name: loki
@@ -986,7 +988,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
+        checksum/config: afbccb84267935561ac7b670188d3889c7c2d9648146e1d3807782ff903dc8e3
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
@@ -1144,7 +1146,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 7165006d5f09fa01f8c0800a0946acac33ef48fdd1644b5972dac9782b895989
+        checksum/config: afbccb84267935561ac7b670188d3889c7c2d9648146e1d3807782ff903dc8e3
       labels:
         app.kubernetes.io/name: loki
         app.kubernetes.io/instance: loki
