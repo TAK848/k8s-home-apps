@@ -25,6 +25,16 @@ spec:
         pathType: Prefix
         backend:
           service:
+            name: ap-archer-service
+            port:
+              name: http
+    host: ap.nw.home.tak848.me
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
             name: adguard-home-service
             port:
               name: http

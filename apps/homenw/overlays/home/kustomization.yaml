@@ -6,5 +6,6 @@ resources:
 - certs.yaml
 - ingress.yaml
 - router-service.yaml
+- ap-service.yaml
 - switch-service.yaml
 - adguard-service.yaml
