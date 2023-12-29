@@ -63,9 +63,9 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: router-rtx1210-service
+            name: switch-x510-service
             port:
-              name: http
+              name: https
     host: switch.nw.home.tak848.me
   tls:
   - hosts:
