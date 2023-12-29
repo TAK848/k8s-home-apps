@@ -33,7 +33,7 @@ data:
     - hostname: test-ucaasdf2.tak848.me
       service: http://argo-nginx-deployment-service.test
     - hostname: test-ucaasdf.tak848.me
-      service: argo-nginx-deployment-service.test
+      service: argo-nginx-deployment-service.test:80
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
     # in the connection from cloudflared to your local service, not from the internet to cloudflared.
