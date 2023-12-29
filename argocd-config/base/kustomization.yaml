@@ -4,6 +4,7 @@ resources:
 - all-apps.yaml
 - argocd.yaml
 - common.yaml
+- cloudflared-tunnel.yaml
 - metallb.yaml
 - nginx-ingress-external.yaml
 - logging.yaml

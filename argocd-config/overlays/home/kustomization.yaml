@@ -6,6 +6,7 @@ patches:
 - path: all-apps.yaml
 - path: argocd.yaml
 - path: common.yaml
+- path: cloudflared-tunnel.yaml
 - path: metallb.yaml
 - path: vault.yaml
 - path: vault-secrets-operator.yaml
