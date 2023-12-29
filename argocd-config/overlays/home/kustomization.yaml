@@ -12,3 +12,4 @@ patches:
 - path: mysql-operator.yaml
 - path: logging.yaml
 - path: logging-crds.yaml
+- path: homnenw.yaml

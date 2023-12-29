@@ -1,0 +1,73 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homenw-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  ingressClassName: nginx-external
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: router-rtx1210-service
+            port:
+              name: http
+    host: router.nw.home.tak848.me
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: adguard-home-service
+            port:
+              name: http
+    host: adguard.nw.home.tak848.me
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: router-bbunit-service
+            port:
+              name: http
+    host: bbunit.nw.home.tak848.me
+  tls:
+  - hosts:
+    - "*.nw.home.tak848.me"
+    secretName: homenw-ingress-cert-secret
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homenw-ingress-backend-https
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
+
+spec:
+  ingressClassName: nginx-external
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: router-rtx1210-service
+            port:
+              name: http
+    host: switch.nw.home.tak848.me
+  tls:
+  - hosts:
+    - "*.nw.home.tak848.me"
+    secretName: homenw-ingress-cert-secret
