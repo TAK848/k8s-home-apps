@@ -14,3 +14,4 @@ patches:
 - path: logging.yaml
 - path: logging-crds.yaml
 - path: homenw.yaml
+- path: nginx-ingress-external.yaml

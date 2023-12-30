@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: "git@github.com:TAK848/k8s-home-apps.git"
-    path: test
+    path: apps/test
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
